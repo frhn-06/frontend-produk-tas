@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+@import "tailwindcss";
+@plugin './hero.ts';
+@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-primary: #3a4eff;
+}
+
+ 
+/* #3a4eff */
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -19,8 +31,8 @@
   }
 }
 
-body {
+/* body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
+} */
