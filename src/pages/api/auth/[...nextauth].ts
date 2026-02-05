@@ -42,7 +42,7 @@ export default NextAuth({
 
                 const accessToken = result.data.data;
                 
-                const me = await AuthService.me(accessToken);
+                const me = await AuthService.getProfileWithToken(accessToken);
                 const user = me.data.data;
 
                 if(accessToken && result.status === 200 && user._id && me.status === 200) {

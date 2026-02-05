@@ -9,11 +9,13 @@ const AuthService = {
 
     login: (payload: ILogin) => instance.post(`${endpoint.AUTH}/login`, payload),
 
-    me: (token: string) => instance.get(`${endpoint.AUTH}/me`, {
+    getProfileWithToken: (token: string) => instance.get(`${endpoint.AUTH}/me`, {
         headers: {
-            Authorization: 'Bearer ' + token
+            Authorization: `Bearer ${token}`
         }
-    })
+    }),
+
+    me: () => instance.get(`${endpoint.AUTH}/me`)
 }
 
 export default AuthService;
