@@ -39,7 +39,7 @@ const useCategory = () => {
 
     const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
         debaunce(() => {
-            router.replace({
+            router.push({
                 query: {
                     ...router.query,
                     search: e.target.value,
@@ -50,7 +50,7 @@ const useCategory = () => {
     }
 
     const handleClearSearch = () => {
-        router.replace({
+        router.push({
             query: {
                 ...router.query,
                 search: "",
@@ -60,7 +60,7 @@ const useCategory = () => {
     }
 
     const handleLimit = (e: ChangeEvent<HTMLSelectElement>) => {
-        router.replace({
+        router.push({
             query: {
                 ...router.query,
                 limit: e.target.value,
@@ -70,7 +70,7 @@ const useCategory = () => {
     }
 
     const handlePagination = (e: number) => {
-        router.replace({
+        router.push({
             query: {
                 ...router.query,
                 page: e
