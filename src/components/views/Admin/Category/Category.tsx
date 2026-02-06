@@ -48,7 +48,7 @@ const Category = () => {
       switch(column.id) {
         case "icon" :
           return ( 
-            <Image src={`${value}`} alt='logo'height={80} width={80} className='mx-auto' />
+            <Image src={`${value}`} alt='logo'height={80} width={80} className='mx-auto aspect-square' />
           );
         case "actions" :
            return (

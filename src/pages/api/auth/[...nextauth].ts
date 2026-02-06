@@ -4,16 +4,16 @@ import NextAuth, { Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from 'next-auth/providers/credentials'
 
-interface UserExtended extends User {
+export interface UserExtended extends User {
     role?: string;
     accessToken?: string;
 }
 
-interface JwtExtended extends JWT {
+export interface JwtExtended extends JWT {
     user?: UserExtended;
 }
 
-interface sessionExtened extends Session {
+export interface sessionExtened extends Session {
     accessToken?: string;
 }
 
