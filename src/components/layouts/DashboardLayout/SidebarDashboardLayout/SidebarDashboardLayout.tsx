@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ISidebar } from "../listConstanta";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 interface TypeProps {
   listSidebar: ISidebar[];
@@ -40,7 +41,7 @@ const SidebarDashboardLayout = (props: TypeProps) => {
 
         <Button variant="flat" className="text-default-700 bg-transparent w-fit">
           <RiLogoutBoxLine className="h-7 w-7" />
-          <span className={cn("hidden lg:block", {"lg:hidden": !isOpenSidebar} )}>
+          <span className={cn("hidden lg:block", {"lg:hidden": !isOpenSidebar} )} onClick={() => signOut()}>
             Logout
           </span>
         </Button>

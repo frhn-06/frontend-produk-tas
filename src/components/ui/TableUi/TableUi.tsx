@@ -1,6 +1,5 @@
 import { limitC } from '@/utils/constant';
 import { Button, Input, Select, SelectItem, Spinner } from '@heroui/react';
-import { useRouter } from 'next/router';
 import { ChangeEvent, Key, ReactNode, useMemo } from 'react';
 import { CiSearch } from 'react-icons/ci';
 import {Pagination} from "@heroui/react";
@@ -11,7 +10,6 @@ interface TypeProps {
   renderCell: (data: Record<string, unknown>, column: {label: string, id: string}) => ReactNode;
   data: Record<string, unknown>[];
   isLoading: boolean;
-  isRefetching: boolean;
   isSuccess: boolean;
 
   textEmpty: string;
@@ -43,7 +41,6 @@ const TableUi = (props: TypeProps) => {
     renderCell,
     data,
     isLoading,
-    isRefetching,
     isSuccess,
 
     textEmpty,
@@ -67,13 +64,12 @@ const TableUi = (props: TypeProps) => {
     onOpenModal
   } = props;
 
-  const router = useRouter();
   
   const topContent = useMemo(() => {
     return (
       <div className='flex flex-col-reverse items-start justify-between gap-y-4 lg:flex-row lg:items-center'>
         {showCreate && (
-          <Input variant='bordered' startContent={(<CiSearch />)} isClearable className='w-full sm:max-w-[24%] bg-white rounded-2xl' onChange={onSearch} onClear={onClearSearch} />
+          <Input variant='bordered' startContent={(<CiSearch />)} isClearable className='w-full sm:max-w-[24%] bg-white rounded-2xl' onChange={onSearch} onClear={onClearSearch} placeholder='Search Category' />
         )}
         {showSearch && (
           <Button color='primary' onPress={onOpenModal}>
@@ -142,14 +138,14 @@ const TableUi = (props: TypeProps) => {
                   }
                 </tbody>
               </table>
-              {isLoading || isRefetching && (
-                <div className='min-h-20 absolute top-0 bottom-0 left-0 right-0 bg-foreground-700/30 backdrop-blur-sm flex justify-center items-center rounded-2xl z-10'>
+              {isLoading && (
+                <div className='min-h-full absolute top-0 bottom-0 left-0 right-0 bg-foreground-700/30 backdrop-blur-sm flex justify-center items-center rounded-2xl z-10'>
                   <Spinner color='primary' />
                 </div>
               )}
               {isSuccess && data.length === 0 && (
                 <div className='flex justify-center items-center min-h-60 w-full'>
-                  <span className='text-xl text-default-500'>
+                  <span className=' text-default-500'>
                     {textEmpty}
                   </span>
                 </div>

@@ -1,5 +1,5 @@
 import InputFile from "@/components/ui/InputFile";
-import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Spinner } from "@heroui/react";
+import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Spinner, Textarea } from "@heroui/react";
 import useAddCategory from "./useAddCategory";
 import { Controller } from "react-hook-form";
 import { useEffect } from "react";
@@ -51,11 +51,11 @@ const AddCategory = (props: TypeProps) => {
           <form encType="multipart/form-data" onSubmit={handleSubmitAddCategory(onAddCategory)}>
             <ModalBody>
               <Controller control={controlAddCategory} name="name" render={({field}) => (
-                <Input {...field} type="text" variant="bordered" label="Category Name" isInvalid={!!errorsAddCategory?.name} errorMessage={errorsAddCategory?.name?.message} />
+                <Input {...field} type="text" variant="bordered" label="Name" placeholder="Category Name" isInvalid={!!errorsAddCategory?.name} errorMessage={errorsAddCategory?.name?.message} />
               )} />
 
               <Controller control={controlAddCategory} name="description" render={({field}) => (
-                <Input {...field} type="text" variant="bordered" label="Category Description" isInvalid={!!errorsAddCategory?.description} errorMessage={errorsAddCategory?.description?.message} />
+                <Textarea {...field} label="Description" variant="bordered" placeholder="Category Description" isInvalid={!!errorsAddCategory?.description} errorMessage={errorsAddCategory?.description?.message} />
               )} />
               
               <Controller control={controlAddCategory} name="icon" render={({field}) => (

@@ -1,12 +1,14 @@
 import TableUi from "@/components/ui/TableUi";
 import COLUMN_LIST from "./Category.constant";
 import useCategory from "./useCategory";
-import { ReactNode, useCallback, useEffect } from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Image } from "@heroui/image";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure } from "@heroui/react";
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure } from "@heroui/react";
 import { CiMenuKebab } from "react-icons/ci";
 import AddCategory from "./AddCategory";
+import DeleteCategory from "./DeleteCategory";
+import Link from "next/link";
 
 const Category = () => {
     const {
@@ -30,7 +32,11 @@ const Category = () => {
 
     const router = useRouter();
 
-    const modalCategory = useDisclosure();
+    const modalAddCategory = useDisclosure();
+
+    const modalDeleteCategory = useDisclosure();
+
+    const [idCategory, setIdCategory] = useState<string | null>(null);
 
     useEffect(() => {
       if(router.isReady) setUrl();
@@ -51,11 +57,11 @@ const Category = () => {
                 <CiMenuKebab />
               </DropdownTrigger>
               <DropdownMenu aria-label="Dynamic Actions" >
-                <DropdownItem key="detail">
-                  Detail 
+                <DropdownItem key="detail" as={Link} href={`/admin/category/${data._id}`}>
+                  Detail
                 </DropdownItem>
-                <DropdownItem key="delete">
-                  Delete 
+                <DropdownItem key="delete" onPress={() => {setIdCategory(`${data._id}`); modalDeleteCategory.onOpen()}}>
+                  Delete
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
@@ -63,41 +69,44 @@ const Category = () => {
         default :
           return value as ReactNode;
       }
-    },[router.push]);
+    },[router.push, modalDeleteCategory]);
 
     return (
         <>
-          <TableUi 
-            columns={COLUMN_LIST}
-            renderCell={renderCell}
-            data={dataCategories?.data || []}
-            isLoading={isLoadingCategories}
-            isRefetching={isRefetchingCategories}
-            isSuccess={isSuccessCategories}
-           
-            textEmpty="Category is Empty"
-            currentSearch={`${currentSearch}`}
-            
-            showCreate
-            showSearch
-            textCreate="Create Category"
+          {Object.keys(router.query).length > 0 && (
+            <TableUi 
+              columns={COLUMN_LIST}
+              renderCell={renderCell}
+              data={dataCategories?.data || []}
+              isLoading={isLoadingCategories || isRefetchingCategories}
+              isSuccess={isSuccessCategories}
+             
+              textEmpty="Category is Empty"
+              currentSearch={`${currentSearch}`}
+              
+              showCreate
+              showSearch
+              textCreate="Create Category"
+  
+              onSearch={handleSearch}
+              onClearSearch={handleClearSearch}
+              onLimit={handleLimit}
+              limit={`${currentLimit}`}
+              currentPage={Number(currentPage)}
+              pagination={dataCategories?.pagination}
+              onPagination={handlePagination}
+  
+              showLimit
+              showPagination
+  
+              onOpenModal={modalAddCategory.onOpen}
+            />
+          )}
 
-            onSearch={handleSearch}
-            onClearSearch={handleClearSearch}
-            onLimit={handleLimit}
-            limit={`${currentLimit}`}
-            currentPage={Number(currentPage)}
-            pagination={dataCategories?.pagination}
-            onPagination={handlePagination}
-
-            showLimit
-            showPagination
-
-            onOpenModal={modalCategory.onOpen}
-          />
-
-          <AddCategory isOpen={modalCategory.isOpen} onClose={modalCategory.onClose} refetch={refetchCategories}
+          <AddCategory isOpen={modalAddCategory.isOpen} onClose={modalAddCategory.onClose} refetch={refetchCategories}
             isRefetching={isRefetchingCategories} />
+
+          <DeleteCategory isOpen={modalDeleteCategory.isOpen} onClose={modalDeleteCategory.onClose} categoryId={idCategory || null}  refetch={refetchCategories} />
         </>
     )
 }

@@ -91,7 +91,7 @@ const DashboardLayout = (props: TypeProps) => {
               </div>
               
               <div className="min-h-18 bg-white flex justify-center items-center">
-                <p className="text-default-700">
+                <p className="text-default-700 text-sm">
                   Copyright &copy; 2026 | Velaro Official by frhn
                 </p>
               </div>

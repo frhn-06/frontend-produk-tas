@@ -4,6 +4,7 @@ import { LIMIT_DEFAULT, PAGE_DEFAULT } from "@/utils/interface";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { ChangeEvent } from "react";
+import { param } from "framer-motion/client";
 
 const useCategory = () => {
     const router = useRouter();
@@ -25,8 +26,11 @@ const useCategory = () => {
     }
 
     const getCategories = async () => {
-        const query = `page=${router.query.page}&limit=${router.query.limit}&search=${router.query.search}`;
-        const {data} = await CategoryService.findAll(query);
+        let params = `page=${router.query.page}&limit=${router.query.limit}`;
+        if(currentSearch) {
+            params += `&search=${router.query.search}`;
+        }
+        const {data} = await CategoryService.findAll(params);
         return data;
     }
 
