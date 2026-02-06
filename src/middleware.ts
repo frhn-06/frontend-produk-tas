@@ -68,3 +68,18 @@ export async function middleware(request: NextRequest) {
 export const config = {
     matcher: ["/login", "/register", "/auth/:path*", "/admin/:path*", "/member/:path*"]
 }
+
+
+
+
+
+
+// <html lang="en">
+// <head>
+// <meta charset="utf-8">
+// <title>Error</title>
+// </head>
+// <body>
+// <pre>Internal Server Error</pre>
+// </body>
+// </html>

@@ -112,15 +112,18 @@ const TableUi = (props: TypeProps) => {
 
           <div className="bg-white rounded-3xl p-4 shadow-xl relative">
             <div className='overflow-auto'>
-              <table className='w-full'>
-                <thead className='rounded-2xl'>
-                  <tr className='bg-default-100 rounded-2xl'>
+              <table className='w-full min-w-180'>
+                <thead className='relative'>
+                  <tr className='relative'>
                     {columns.map((c) => (
                       <th key={c.id} className='p-4 text-sm'>
                         {c.label}
                       </th>
                     ))}
                   </tr>
+                  <div className='absolute top-0 h-full w-full bg-primary/20 rounded-xl z-0'>
+
+                  </div>
                 </thead>
                 <tbody className='relative'>
                   {!isLoading && data.length !== 0 &&
