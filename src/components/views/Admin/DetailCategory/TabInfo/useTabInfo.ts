@@ -9,7 +9,7 @@ const schemaCategory = yup.object({
 
 const useTabInfo = () => {
 
-    const {handleSubmit:handleSubmitInfoCategory, control: controlInfoCategory, formState:{errors}, setValue: setValueInfoCategory} = useForm({
+    const {handleSubmit:handleSubmitInfoCategory, control: controlInfoCategory, formState:{errors}, setValue: setValueInfoCategory, reset} = useForm({
         resolver: yupResolver(schemaCategory)
     })
 
@@ -18,7 +18,8 @@ const useTabInfo = () => {
         controlInfoCategory,
         errors,
         setValueInfoCategory,
-        handleSubmitInfoCategory
+        handleSubmitInfoCategory,
+        reset
     }
 }
 

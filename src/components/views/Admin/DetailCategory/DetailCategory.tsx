@@ -32,6 +32,7 @@ const DetailCategory = () => {
               isPendingUpdate={isPendingUpdateCategory}
               isRefetching={isRefetchingCategory}
               onUpdate={handleUpdateCategory}
+              isSuccessUpdate={isSuccessUpdateCategory}
             />
           </Tab>
           <Tab key="info" title="info">
@@ -41,6 +42,7 @@ const DetailCategory = () => {
               isRefetching={isRefetchingCategory}
               onUpdate={handleUpdateCategory}
               isPendingUpdate={isPendingUpdateCategory}
+              isSuccessUpdate={isSuccessUpdateCategory}
             />
           </Tab>
         </Tabs>

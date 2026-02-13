@@ -1,7 +1,7 @@
 import { ICategory } from "@/types/category";
 import useTabIcon from "./useTabIcon";
 import { useEffect } from "react";
-import { Button, Card, CardBody, CardFooter, CardHeader, Spinner } from "@heroui/react";
+import { Button, Card, CardBody, CardFooter, CardHeader, Skeleton, Spinner, Image } from "@heroui/react";
 import InputFile from "@/components/ui/InputFile";
 import { Controller } from "react-hook-form";
 
@@ -11,6 +11,7 @@ interface TypeProps {
   isRefetching: boolean;
   onUpdate: (payload: ICategory) => void;
   isPendingUpdate: boolean;
+  isSuccessUpdate: boolean;
 }
 
 const TabIcon = (props: TypeProps) => {
@@ -19,7 +20,8 @@ const TabIcon = (props: TypeProps) => {
       isLoading,
       isRefetching,
       onUpdate,
-      isPendingUpdate
+      isPendingUpdate,
+      isSuccessUpdate
     } = props;
   
     const {
@@ -27,6 +29,7 @@ const TabIcon = (props: TypeProps) => {
         errors,
         setValueIconCategory,
         handleSubmitIconCategory,
+        reset,
 
         isPendingUploadImage,
         isPendingDeleteImage,
@@ -38,10 +41,11 @@ const TabIcon = (props: TypeProps) => {
     } = useTabIcon();
   
     useEffect(() => {
-      if(data) {
-        setValueIconCategory("icon", `${data}`);
+      if(isSuccessUpdate) {
+        reset();
       }
-    }, [data])
+    }, [isSuccessUpdate])
+    
   
     return (
       <Card className="text-default-700">
@@ -52,6 +56,16 @@ const TabIcon = (props: TypeProps) => {
             </h1>
           </CardHeader>
           <CardBody className="gap-4">
+            <p className="text-default-700 font-semibold">
+              Icon
+            </p>
+            <div className="flex justify-center items-center flex-col gap-2">
+              <Skeleton isLoaded={!!data} className="min-h-20 rounded-2xl">
+                <div className="w-30 lg:w-60">
+                  <Image src={data} alt="image" className="w-full" />
+                </div>
+              </Skeleton>
+            </div>
             <Controller control={controlIconCategory} name="icon" render={({field}) => (
               <InputFile 
                 {...field}
@@ -64,8 +78,8 @@ const TabIcon = (props: TypeProps) => {
                 isPendingUpload={isPendingUploadImage}
                 isPendingDelete={isPendingDeleteImage}
                 errorMessage={errors?.icon?.message}
-                isPendingUploadCategory={isPendingUpdate}
-                
+                isPendingSave={isPendingUpdate}
+                textInCell="Add icon for category"
               />
             )} />
           </CardBody>

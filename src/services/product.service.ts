@@ -1,0 +1,17 @@
+import instance from "@/libs/axios";
+import { IProduct } from "@/types/product";
+import endpoint from "./endpoint,constant";
+
+const ProductService = {
+    create: (payload: IProduct) => instance.post(`${endpoint.PRODUCT}`, payload),
+
+    findAll: (query: string) => instance.get(`${endpoint.PRODUCT}?${query}`),
+
+    findOneById: (id: string) => instance.get(`${endpoint.PRODUCT}/${id}`),
+
+    update: (id:string, payload: IProduct) => instance.put(`${endpoint.PRODUCT}/${id}`, payload),
+
+    delete: (productId: string) => instance.put(`${endpoint.PRODUCT}/${productId}/delete`)
+}
+
+export default ProductService;

@@ -10,6 +10,12 @@ const MediaServices = {
         }
     }),
 
+    uploadBuanyak: (payload: FormData) => instance.post(`${endpoint.MEDIA}/upload-multiple`, payload, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    }),
+
     delete: (payload: IFileUrl) => instance.delete(`${endpoint.MEDIA}/remove`, {data: payload})
 }
 

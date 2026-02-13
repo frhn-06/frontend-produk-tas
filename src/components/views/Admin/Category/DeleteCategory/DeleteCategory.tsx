@@ -1,12 +1,13 @@
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Spinner } from "@heroui/react";
 import useDeleteCategory from "./useDeleteCategory";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 interface TypeProps {
   isOpen: boolean;
   onClose: () => void;
   categoryId: string | null;
   refetch: () => void;
+  setIdCategory: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 const DeleteCategory = (props: TypeProps) => {
@@ -14,18 +15,20 @@ const DeleteCategory = (props: TypeProps) => {
       isOpen,
       onClose,
       categoryId,
-      refetch
+      refetch,
+      setIdCategory
     } = props;
 
     const {
       handleDeleteCategory,
       isPendingDeleteCategory,
-      isSuccessDeleteCategory
+      isSuccessDeleteCategory,
     } = useDeleteCategory(`${categoryId}`);
 
     useEffect(() => {
       if(isSuccessDeleteCategory) {
         onClose();
+        setIdCategory(null);
         refetch();
       }
     }, [isSuccessDeleteCategory])

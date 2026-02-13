@@ -31,6 +31,8 @@ const DashboardLayout = (props: TypeProps) => {
       dataUser,
       isLoading
     } = useDashboard();
+
+    const router = useRouter();
     
 
     const [isOpenSidebar, setIsOpenSidebar] = useState(true);
@@ -68,7 +70,11 @@ const DashboardLayout = (props: TypeProps) => {
                 <div className="min-h-20 w-full bg-white shadow-lg flex justify-between items-center px-4 rounded-2xl">
                   <div>
                     <h1 className="text-xl font-bold text-default-700">
-                      {titleHead}
+                      {router.pathname.startsWith("/admin/dashboard") || router.pathname.startsWith("/member/dashboard") ?
+                        dataUser?.data?.fullName !== undefined && 
+                        `Halo ${dataUser?.data?.fullName}` :
+                        `${titleHead}`
+                      }
                     </h1>
                     {!!description && (
                       <p className="text-sm text-default-400"> 

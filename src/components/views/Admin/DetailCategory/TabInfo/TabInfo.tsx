@@ -10,6 +10,7 @@ interface TypeProps {
   isRefetching: boolean;
   onUpdate: (payload: ICategory) => void;
   isPendingUpdate: boolean;
+  isSuccessUpdate: boolean;
 }
 
 const TabInfo = (props: TypeProps) => {
@@ -18,14 +19,16 @@ const TabInfo = (props: TypeProps) => {
     isLoading,
     isRefetching,
     onUpdate,
-    isPendingUpdate
+    isPendingUpdate,
+    isSuccessUpdate
   } = props;
 
   const {
     handleSubmitInfoCategory,
     controlInfoCategory,
     errors,
-    setValueInfoCategory
+    setValueInfoCategory,
+    reset
   } = useTabInfo();
 
   useEffect(() => {
@@ -34,6 +37,12 @@ const TabInfo = (props: TypeProps) => {
       setValueInfoCategory("description", `${data?.description}`)
     }
   }, [data])
+
+  useEffect(() => {
+    if(isSuccessUpdate) {
+      reset();
+    }
+  },[isSuccessUpdate])
 
   return (
     <Card className="text-default-700">

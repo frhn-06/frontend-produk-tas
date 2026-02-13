@@ -5,7 +5,7 @@ import { ICategory } from "@/types/category";
 const CategoryService = {
     create: (payload: ICategory) => instance.post(`${endpoint.CATEGORY}`, payload),
     
-    findAll: (query: string) => instance.get(`${endpoint.CATEGORY}?${query}`),
+    findAll: (query?: string) => instance.get(`${endpoint.CATEGORY}?${query}`),
 
     delete: (id: string) => instance.delete(`${endpoint.CATEGORY}/${id}/delete`),
 

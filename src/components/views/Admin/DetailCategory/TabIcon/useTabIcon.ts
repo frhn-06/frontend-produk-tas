@@ -14,7 +14,7 @@ const useTabIcon = () => {
     } = useMediaHandler();
 
 
-    const {handleSubmit:handleSubmitIconCategory, control: controlIconCategory, formState:{errors}, setValue: setValueIconCategory, getValues, watch} = useForm({
+    const {handleSubmit:handleSubmitIconCategory, control: controlIconCategory, formState:{errors}, setValue: setValueIconCategory, getValues, watch, reset} = useForm({
         resolver: yupResolver(schemaCategory)
     })
 
@@ -54,6 +54,7 @@ const useTabIcon = () => {
         errors,
         setValueIconCategory,
         handleSubmitIconCategory,
+        reset,
 
         isPendingUploadImage,
         isPendingDeleteImage,

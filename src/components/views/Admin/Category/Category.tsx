@@ -106,7 +106,7 @@ const Category = () => {
           <AddCategory isOpen={modalAddCategory.isOpen} onClose={modalAddCategory.onClose} refetch={refetchCategories}
             isRefetching={isRefetchingCategories} />
 
-          <DeleteCategory isOpen={modalDeleteCategory.isOpen} onClose={modalDeleteCategory.onClose} categoryId={idCategory || null}  refetch={refetchCategories} />
+          <DeleteCategory isOpen={modalDeleteCategory.isOpen} onClose={modalDeleteCategory.onClose} categoryId={idCategory || null}  refetch={refetchCategories} setIdCategory={setIdCategory} />
         </>
     )
 }

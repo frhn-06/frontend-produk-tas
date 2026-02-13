@@ -68,7 +68,7 @@ const AddCategory = (props: TypeProps) => {
                   isPendingUpload={isPendingUploadImage}
                   isInvalid={!!errorsAddCategory?.icon}
                   errorMessage={errorsAddCategory?.icon?.message}
-                  isPendingUploadCategory={isPendingAddCategory}
+                  isPendingSave={isPendingAddCategory}
                   onDelete={handleDeleteImage}
                   isPendingDelete={isPendingDeleteImage}
                 />
@@ -80,7 +80,7 @@ const AddCategory = (props: TypeProps) => {
                 Cancel
               </Button>
               <Button type="submit" color="primary" variant="solid" disabled={isPendingAddCategory || isPendingUploadImage || isPendingDeleteImage}>
-                {isPendingAddCategory ? <Spinner color="default"  /> : "Create"}
+                {isPendingAddCategory ? <Spinner color="default" size="sm" /> : "Create"}
               </Button>
             </ModalFooter>
           </form>

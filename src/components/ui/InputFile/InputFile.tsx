@@ -11,9 +11,11 @@ interface TypeProps {
   isPendingUpload: boolean;
   isInvalid: boolean;
   errorMessage: string | undefined;
-  isPendingUploadCategory: boolean;
+  isPendingSave: boolean;
   onDelete: (onChange: (files: FileList | undefined) => void) => void;
-  isPendingDelete: boolean
+  isPendingDelete: boolean;
+  label?: string;
+  textInCell: string;
 }
 
 const InputFile = (props: TypeProps) => {
@@ -25,9 +27,11 @@ const InputFile = (props: TypeProps) => {
       isPendingUpload,
       isInvalid,
       errorMessage,
-      isPendingUploadCategory,
+      isPendingSave,
       onDelete,
-      isPendingDelete
+      isPendingDelete,
+      label,
+      textInCell
     } = props;
 
 
@@ -39,6 +43,9 @@ const InputFile = (props: TypeProps) => {
 
     return (
       <div>
+        <p className="text-default-700 mb-2">
+          {label}
+        </p>
         <label htmlFor="foto-input">
           <div className={cn("w-full min-h-32 rounded-2xl bg-default-100 border-2 border-foreground-400 border-dashed flex justify-center items-center p-4 relative", {"border-danger": isInvalid})}>
             {inputIcon ? (
@@ -59,7 +66,7 @@ const InputFile = (props: TypeProps) => {
                   +
                 </h1>
                 <p className="text-sm text-default-400">
-                  Add image for icon
+                  {textInCell}
                 </p>
               </div>
             )}
@@ -73,7 +80,7 @@ const InputFile = (props: TypeProps) => {
           </p>
         ) }
 
-        <input type="file" id="foto-input" name={name} className="hidden" onChange={(e) => changeInput(e)} disabled={isPendingUploadCategory || isPendingUpload || isPendingDelete || !!inputIcon} accept="image/*" />
+        <input type="file" id="foto-input" name={name} className="hidden" onChange={(e) => changeInput(e)} disabled={isPendingSave || isPendingUpload || isPendingDelete || !!inputIcon} accept="image/*" />
       </div>
     )
 }
