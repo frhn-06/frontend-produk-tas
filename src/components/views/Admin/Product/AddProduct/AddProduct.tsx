@@ -94,6 +94,7 @@ const AddProduct = (props: TypeProps) => {
                   isPendingSave={isPendingAddProduct}
                   onDelete={handleDeleteImage}
                   isPendingDelete={isPendingDeleteImage}
+                  textInCell="Add image for product"
                 />
               )} />
             </ModalBody>

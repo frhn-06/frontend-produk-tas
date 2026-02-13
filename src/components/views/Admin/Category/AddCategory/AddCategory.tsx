@@ -71,6 +71,7 @@ const AddCategory = (props: TypeProps) => {
                   isPendingSave={isPendingAddCategory}
                   onDelete={handleDeleteImage}
                   isPendingDelete={isPendingDeleteImage}
+                  textInCell="Add icon for category"
                 />
               )} />
             </ModalBody>
