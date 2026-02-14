@@ -11,7 +11,13 @@ const ProductService = {
 
     update: (id:string, payload: IProduct) => instance.put(`${endpoint.PRODUCT}/${id}`, payload),
 
-    delete: (productId: string) => instance.put(`${endpoint.PRODUCT}/${productId}/delete`)
+    delete: (id: string) => instance.put(`${endpoint.PRODUCT}/${id}/delete`),
+
+    restore: (id: string) => instance.put(`${endpoint.PRODUCT}/${id}/restore`),
+
+    deletePermanent: (id: string) => instance.delete(`${endpoint.PRODUCT}/${id}/delete-permanent`),
+
+    findDeleted: (query: string) => instance.get(`/product-deleted?${query}`),
 }
 
 export default ProductService;

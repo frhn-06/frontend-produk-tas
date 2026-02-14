@@ -4,6 +4,7 @@ import { ChangeEvent, Key, ReactNode, useMemo } from 'react';
 import { CiSearch } from 'react-icons/ci';
 import {Pagination} from "@heroui/react";
 import { IPagination } from '@/utils/interface';
+import { cn } from '@/utils/cn';
 
 interface TypeProps {
   columns: Array<{label: string, id: string}>;
@@ -16,6 +17,7 @@ interface TypeProps {
   currentSearch: string;
 
   showSearch?: boolean;
+  placeholderSearch?: string;
   showCreate?: boolean;
 
   textCreate?: string;
@@ -32,6 +34,8 @@ interface TypeProps {
   showPagination?: boolean;
 
   onOpenModal?: () => void;
+
+  isTableDelete?: boolean
 }
 
 
@@ -47,6 +51,7 @@ const TableUi = (props: TypeProps) => {
     currentSearch,
 
     showCreate,
+    placeholderSearch,
     showSearch,
     textCreate = "Create",
 
@@ -61,24 +66,26 @@ const TableUi = (props: TypeProps) => {
     showLimit,
     showPagination,
 
-    onOpenModal
+    onOpenModal,
+
+    isTableDelete
   } = props;
 
   
   const topContent = useMemo(() => {
     return (
       <div className='flex flex-col-reverse items-start justify-between gap-y-4 lg:flex-row lg:items-center'>
-        {showCreate && (
-          <Input variant='bordered' startContent={(<CiSearch />)} isClearable className='w-full sm:max-w-[24%] bg-white rounded-2xl' onChange={onSearch} onClear={onClearSearch} placeholder='Search Category' />
-        )}
         {showSearch && (
+          <Input variant='bordered' startContent={(<CiSearch />)} isClearable className='w-full sm:max-w-[24%] bg-white rounded-2xl' onChange={onSearch} onClear={onClearSearch} placeholder={placeholderSearch} />
+        )}
+        {showCreate && (
           <Button color='primary' onPress={onOpenModal}>
             {textCreate}
           </Button>
         )}
       </div>
     )
-  },[showSearch, showCreate, textCreate, currentSearch, onSearch, onClearSearch, onOpenModal]);
+  },[showSearch, showCreate, textCreate, currentSearch, onSearch, onClearSearch, onOpenModal, placeholderSearch]);
 
 
   const bottomContent = useMemo(() => {
@@ -121,7 +128,7 @@ const TableUi = (props: TypeProps) => {
                       </th>
                     ))}
                   </tr>
-                  <div className='absolute top-0 h-full w-full bg-primary/20 rounded-xl z-0'>
+                  <div className={cn("absolute top-0 h-full w-full bg-primary/20 rounded-xl z-0", {"bg-danger/20" : isTableDelete})}>
 
                   </div>
                 </thead>

@@ -108,8 +108,9 @@ const Product = () => {
               currentSearch={`${currentSearch}`}
               
               showCreate
+              placeholderSearch="Search Product"
               showSearch
-              textCreate="Create Category"
+              textCreate="Create Product"
   
               onSearch={handleSearch}
               onClearSearch={handleClearSearch}

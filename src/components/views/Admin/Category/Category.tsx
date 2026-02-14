@@ -86,6 +86,7 @@ const Category = () => {
               
               showCreate
               showSearch
+              placeholderSearch="Search Category"
               textCreate="Create Category"
   
               onSearch={handleSearch}
