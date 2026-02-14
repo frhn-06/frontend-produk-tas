@@ -37,17 +37,17 @@ const ModalDeletePermanentProduct = (props: TypeProps) => {
         <Modal isOpen={isOpen} onClose={onClose} className="my-auto">
           <ModalContent>
             <ModalHeader>
-              Restore Product
+              Delete Product Permanent
             </ModalHeader>
             <ModalBody>
-              Do you sure for restore this product?
+              Do you sure for delete this product?
             </ModalBody>
             <ModalFooter>
               <Button color="warning" variant="flat" onPress={onClose} disabled={isPendingDeletePermanent}>
                 Cancel
               </Button>
               <Button color="danger" variant="solid" disabled={isPendingDeletePermanent} onPress={handleDeletePermanent}>
-                {isPendingDeletePermanent ? <Spinner color="default" size="sm" /> : "Restore" }
+                {isPendingDeletePermanent ? <Spinner color="default" size="sm" /> : "Delete" }
               </Button>
             </ModalFooter>
           </ModalContent>

@@ -120,8 +120,8 @@ const ProductDeleted = () => {
           <ModalDeletePermanentProduct 
             isOpen={DeletePermanent.isOpen}
             onClose={DeletePermanent.onClose}
-            productId={productId}
-            setIdProduct={setProductId}
+            productId={productIdd}
+            setIdProduct={setProductIdd}
             refetch={refetchProductDeleted}
           />
         </>
