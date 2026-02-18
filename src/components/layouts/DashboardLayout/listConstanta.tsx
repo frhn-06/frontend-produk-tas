@@ -1,4 +1,4 @@
-import { MdOutlineManageAccounts, MdOutlineSpaceDashboard } from "react-icons/md";
+import { MdOutlineManageAccounts, MdOutlinePendingActions, MdOutlineSpaceDashboard } from "react-icons/md";
 import { BiCategory } from "react-icons/bi";
 import { GiSchoolBag } from "react-icons/gi";
 import { IoWalletOutline } from "react-icons/io5";
@@ -30,6 +30,12 @@ const LIST_SIDEBAR_ADMIN = [
         id: "product",
         href: "/admin/product",
         icon: <GiSchoolBag className="h-7 w-7" />   
+    },
+    {
+        label: "Activity",
+        id: "activity",
+        href: "/admin/activity",
+        icon: <MdOutlinePendingActions className="h-7 w-7" />   
     },
     {
         label: "Transaction",

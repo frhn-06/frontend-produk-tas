@@ -1,6 +1,8 @@
 // import Image from "next/image";
 // import { Geist, Geist_Mono } from "next/font/google";
 
+import { signOut } from "next-auth/react";
+
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
 //   subsets: ["latin"],
@@ -15,6 +17,7 @@ export default function Home() {
   return (
     <div>
       ini halaman home
+      <button onClick={() => signOut()}>logout</button>
     </div>
   );
 }

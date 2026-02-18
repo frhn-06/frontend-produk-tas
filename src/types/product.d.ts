@@ -12,7 +12,9 @@ interface IProduct {
     isPublish?: string;
     isDeleted?: string;
     starsAgr?: number;
-    totalComment?: number 
+    totalComment?: number;
+    activities?: string[];
+    target?: string;
 }
 
 

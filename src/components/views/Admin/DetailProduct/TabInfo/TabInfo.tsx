@@ -1,9 +1,10 @@
 import { ICategory } from "@/types/category";
-import { Autocomplete, AutocompleteItem, Button, Card, CardBody, CardFooter, CardHeader, Input, Select, SelectItem, Skeleton, Spinner, Textarea } from "@heroui/react";
+import { Autocomplete, AutocompleteItem, Button, Card, CardBody, CardFooter, CardHeader, Checkbox, CheckboxGroup, Input, Select, SelectItem, Skeleton, Spinner, Textarea } from "@heroui/react";
 import { useEffect } from "react";
 import { Controller } from "react-hook-form";
 import useTabInfo from "./useTabInfo";
 import { IProduct } from "@/types/product";
+import { IActivity } from "@/types/activity";
 
 
 interface TypeProps {
@@ -33,7 +34,10 @@ const TabInfo = (props: TypeProps) => {
     reset,
 
     dataCategories,
-    isLoadingCategories
+    isLoadingCategories,
+
+    dataActivitySelect,
+    isLoadingActivitySelect
   } = useTabInfo();
 
   useEffect(() => {
@@ -46,6 +50,8 @@ const TabInfo = (props: TypeProps) => {
       setValueInfoProduct("quantity", `${data?.quantity}`);
       setValueInfoProduct("discount", `${data?.discount}`);
       setValueInfoProduct("description", `${data?.description}`);
+      setValueInfoProduct("target", `${data?.target}`);
+      setValueInfoProduct("activities", data?.activities);
     }
   }, [data])
 
@@ -78,6 +84,37 @@ const TabInfo = (props: TypeProps) => {
                   </AutocompleteItem>
                 )}
               </Autocomplete>         
+            )} />
+          </Skeleton>
+          <Skeleton isLoaded={!isLoading && !isRefetching && !!data?.target} className="rounded-2xl">
+            <Controller control={controlInfoProduct} name="target" render={({field}) => (
+              <Select {...field} label="Select Target" variant="bordered" errorMessage={errors?.target?.message} selectedKeys={data?.target ? [data.target] : []}>
+                <SelectItem key="unisex">
+                  Unisex
+                </SelectItem>
+                <SelectItem key="pria">
+                  Pria
+                </SelectItem>
+                <SelectItem key="wanita">
+                  Wanita
+                </SelectItem>
+                <SelectItem key="anak">
+                  Anak-anak
+                </SelectItem>
+              </Select>
+            )} />
+          </Skeleton>
+          <Skeleton isLoaded={!isLoading && !isRefetching} className="rounded-2xl">
+            <Controller control={controlInfoProduct} name="activities" render={({field}) => (
+              <CheckboxGroup {...field} label={(<span className="text-default-500">Activity</span>)} value={data?.activities ?? []} onChange={field.onChange} isInvalid={!!errors?.activities} errorMessage={errors?.activities?.message}>
+                {dataActivitySelect?.data?.map((a: IActivity) => (
+                  <Checkbox key={`${a._id}`} value={`${a._id}`} >
+                    <span className="text-default-800">
+                      {a.name}
+                    </span>
+                  </Checkbox>
+                ))}
+              </CheckboxGroup>
             )} />
           </Skeleton>
           <Skeleton isLoaded={!isLoading && !isRefetching} className="rounded-2xl">

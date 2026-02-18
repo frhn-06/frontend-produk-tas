@@ -1,3 +1,4 @@
+import ActivityService from '@/services/activity.service';
 import CategoryService from '@/services/category.service';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useQuery } from '@tanstack/react-query';
@@ -13,12 +14,13 @@ const schemaProduct = yup.object({
     quantity: yup.string().required('please input quantity'),
     description: yup.string().required('please input category description'),
     isFeatured: yup.string().required('please select featured'),
-    discount: yup.string()
+    discount: yup.string(),
+    target: yup.string().required('please delect product target'),
+    activities: yup.array()
 });
 
 const useTabInfo = () => {
 
-    const router = useRouter();
 
     const {handleSubmit:handleSubmitInfoProduct, control: controlInfoProduct, formState:{errors}, setValue: setValueInfoProduct, reset} = useForm({
         resolver: yupResolver(schemaProduct)
@@ -36,6 +38,17 @@ const useTabInfo = () => {
         enabled: true
     });
 
+    const getActivity = async () => {
+        const {data} = await ActivityService.findAll();
+        return data;
+    }
+    
+    const {data: dataActivitySelect, isLoading: isLoadingActivitySelect} = useQuery({
+        queryKey: ["SelectActivity"],
+        queryFn: getActivity,
+        enabled: true
+    })
+
 
     return {
         controlInfoProduct,
@@ -45,8 +58,10 @@ const useTabInfo = () => {
         reset,
 
         dataCategories,
-        isLoadingCategories
+        isLoadingCategories,
 
+        dataActivitySelect,
+        isLoadingActivitySelect
     }
 }
 

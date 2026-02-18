@@ -14,7 +14,7 @@ interface TypeProps {
   isSuccess: boolean;
 
   textEmpty: string;
-  currentSearch: string;
+  currentSearch?: string;
 
   showSearch?: boolean;
   placeholderSearch?: string;
@@ -23,7 +23,7 @@ interface TypeProps {
   textCreate?: string;
 
   onSearch?: (e: ChangeEvent<HTMLInputElement>) => void;
-  onClearSearch: () => void;
+  onClearSearch?: () => void;
   onLimit: (e: ChangeEvent<HTMLSelectElement>) => void;
   limit: string;
   currentPage: number;

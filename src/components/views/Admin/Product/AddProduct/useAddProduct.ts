@@ -1,5 +1,6 @@
 import { toasterContext } from "@/context/toasterContext"
 import useMediaHandler from "@/hooks/mediaHandler"
+import ActivityService from "@/services/activity.service"
 import CategoryService from "@/services/category.service"
 import ProductService from "@/services/product.service"
 import { IProduct } from "@/types/product"
@@ -10,13 +11,15 @@ import { useContext } from "react"
 import { useForm } from "react-hook-form"
 import * as yup from 'yup'
 
-const schemaCategory = yup.object({
+const schemaProduct = yup.object({
     name: yup.string().required('please input name category'),
     categoryId: yup.string().required('please select category'),
     description: yup.string().required('please input description category'),
     price: yup.string().required('please select price'),
     quantity: yup.string().required('please select quantity'),
-    image: yup.mixed<string | FileList>().required('please select icon')
+    image: yup.mixed<string | FileList>().required('please select icon'),
+    activities: yup.array().required('please select minimal one of activity'),
+    target: yup.string().required('please select product target')
 })
 
 const useAddProduct = () => {
@@ -30,7 +33,7 @@ const useAddProduct = () => {
 
 
     const {control: controlAddProduct, handleSubmit: handleSubmitAddProduct, formState: {errors: errorsAddProduct}, setValue: setValueAddProduct, watch: watchAddProduct, reset: resetAddProduct, getValues: getValuesProduct} = useForm({
-        resolver: yupResolver(schemaCategory)
+        resolver: yupResolver(schemaProduct)
     })
 
 
@@ -97,9 +100,10 @@ const useAddProduct = () => {
         const load = {
             ...payload,
             price: Number(payload.price),
-            quantity: Number(payload.quantity)
+            quantity: Number(payload.quantity),
         }
-        return mutateAddProduct(load);;
+        return mutateAddProduct(load);
+        // console.log(load);
     }
 
 
@@ -114,6 +118,20 @@ const useAddProduct = () => {
         queryFn: getCategory,
         enabled: router.isReady
     })
+
+
+
+    const getActivity = async () => {
+        const {data} = await ActivityService.findAll();
+        return data;
+    }
+
+    const {data: dataActivitySelect, isLoading: isLoadingActivitySelect} = useQuery({
+        queryKey: ["SelectActivity"],
+        queryFn: getActivity,
+        enabled: router.isReady
+    })
+
 
     return {
         controlAddProduct,
@@ -133,7 +151,10 @@ const useAddProduct = () => {
         isSuccessAddProduct,
 
         dataCategorySelect,
-        isLoadingCategorySelect
+        isLoadingCategorySelect,
+
+        dataActivitySelect,
+        isLoadingActivitySelect
     }
 }
 

@@ -1,9 +1,10 @@
 import InputFile from "@/components/ui/InputFile";
-import { Autocomplete, AutocompleteItem, Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Skeleton, Spinner, Textarea } from "@heroui/react";
+import { Autocomplete, AutocompleteItem, Button, Checkbox, CheckboxGroup, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Select, SelectItem, Skeleton, Spinner, Textarea } from "@heroui/react";
 import { Controller } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ICategory } from "@/types/category";
 import useAddProduct from "./useAddProduct";
+import { IActivity } from "@/types/activity";
 
 interface TypeProps {
   isOpen: boolean;
@@ -34,7 +35,9 @@ const AddProduct = (props: TypeProps) => {
       isPendingDeleteImage,
       isSuccessAddProduct,
       dataCategorySelect,
-      isLoadingCategorySelect
+      isLoadingCategorySelect,
+      dataActivitySelect,
+      isLoadingActivitySelect
     } = useAddProduct();
 
     useEffect(() => {
@@ -43,6 +46,8 @@ const AddProduct = (props: TypeProps) => {
         refetch();
       }
     },[isSuccessAddProduct])
+
+
 
     return (
       <Modal isOpen={isOpen} onClose={() => handleCloseModal(onClose)} placement="center" scrollBehavior="outside">
@@ -54,12 +59,12 @@ const AddProduct = (props: TypeProps) => {
           <form encType="multipart/form-data" onSubmit={handleSubmitAddProduct(onAddProduct)}>
             <ModalBody>
               <Controller control={controlAddProduct} name="name" render={({field}) => (
-                <Input {...field} type="text" variant="bordered" label="Name" placeholder="Product Name" isInvalid={!!errorsAddProduct?.name} errorMessage={errorsAddProduct?.name?.message} />
+                <Input {...field} type="text" variant="bordered" label={(<span className="text-default-500">Name</span>)} placeholder="Product Name" isInvalid={!!errorsAddProduct?.name} errorMessage={errorsAddProduct?.name?.message} labelPlacement="outside" />
               )} />
 
               <Skeleton isLoaded={!isLoadingCategorySelect} className="rounded-2xl">
                 <Controller control={controlAddProduct} name="categoryId" render={({field}) => (
-                  <Autocomplete {...field} label="Select an Category" variant="bordered" isInvalid={!!errorsAddProduct?.categoryId} errorMessage={errorsAddProduct?.categoryId?.message} selectedKey={field.value || null} onSelectionChange={(key) => field.onChange(key)}>
+                  <Autocomplete {...field} label={(<span className="text-default-500">Category</span>)} variant="bordered" isInvalid={!!errorsAddProduct?.categoryId} errorMessage={errorsAddProduct?.categoryId?.message} labelPlacement="outside" selectedKey={field.value || null} onSelectionChange={(key) => field.onChange(key)}>
                     {dataCategorySelect?.data?.map((c: ICategory) => (
                       <AutocompleteItem key={c._id}>
                         {c.name}
@@ -70,16 +75,49 @@ const AddProduct = (props: TypeProps) => {
               </Skeleton>
 
               <Controller control={controlAddProduct} name="quantity" render={({field}) => (
-                <Input {...field} type="number" variant="bordered" label="Quantity" placeholder="Quantity Product" isInvalid={!!errorsAddProduct?.quantity} errorMessage={errorsAddProduct?.quantity?.message} />
+                <Input {...field} type="number" variant="bordered" label={(<span className="text-default-500">Stock</span>)} placeholder="Quantity Product" isInvalid={!!errorsAddProduct?.quantity} errorMessage={errorsAddProduct?.quantity?.message} labelPlacement="outside" />
               )} />
               
               <Controller control={controlAddProduct} name="price" render={({field}) => (
-                <Input {...field} type="number" variant="bordered" label="Price" placeholder="Price Product" isInvalid={!!errorsAddProduct?.price} errorMessage={errorsAddProduct?.price?.message} />
+                <Input {...field} type="number" variant="bordered" label={(<span className="text-default-500">Price</span>)} placeholder="Price Product" isInvalid={!!errorsAddProduct?.price} errorMessage={errorsAddProduct?.price?.message} labelPlacement="outside" />
               )} />
+
+              <Skeleton isLoaded={!isLoadingActivitySelect} className="rounded-2xl">
+                <Controller control={controlAddProduct} name="activities" defaultValue={[]} render={({field}) => (
+                  <CheckboxGroup {...field} label={(<span className="text-default-500">Activity</span>)} value={field.value ?? []} onChange={field.onChange} isInvalid={!!errorsAddProduct?.activities} errorMessage={errorsAddProduct?.activities?.message}>
+                    {dataActivitySelect?.data?.map((a: IActivity) => (
+                      <Checkbox key={`${a._id}`} value={`${a._id}`} >
+                        <span className="text-default-800">
+                          {a.name}
+                        </span>
+                      </Checkbox>
+                    ))}
+                  </CheckboxGroup>
+                )} />
+              </Skeleton>
+
+              <Controller control={controlAddProduct} name="target" render={({field}) => (
+                <Select {...field} label={(<span className="text-default-500">Target</span>)} labelPlacement="outside"  isInvalid={!!errorsAddProduct?.target} errorMessage={errorsAddProduct?.target?.message}>
+                  <SelectItem key="unisex">
+                    Unisex
+                  </SelectItem>
+                  <SelectItem key="pria">
+                    Pria
+                  </SelectItem>
+                  <SelectItem key="wanita">
+                    Wanita
+                  </SelectItem>
+                  <SelectItem key="anak">
+                    Anak-anak
+                  </SelectItem>
+                </Select>
+              )} />
+              
 
               <Controller control={controlAddProduct} name="description" render={({field}) => (
                 <Textarea {...field} label="Description" variant="bordered" placeholder="Product Description" isInvalid={!!errorsAddProduct?.description} errorMessage={errorsAddProduct?.description?.message} />
               )} />
+
               
               <Controller control={controlAddProduct} name="image" render={({field}) => (
                 <InputFile 

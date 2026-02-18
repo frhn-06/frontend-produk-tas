@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 
 const useDeletePermanentProduct = (id: string) => {
-    const router = useRouter();
 
     const {setToaster} = useContext(toasterContext);
 
