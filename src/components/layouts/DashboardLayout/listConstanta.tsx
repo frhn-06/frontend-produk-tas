@@ -3,6 +3,7 @@ import { BiCategory } from "react-icons/bi";
 import { GiSchoolBag } from "react-icons/gi";
 import { IoWalletOutline } from "react-icons/io5";
 import { ReactNode } from "react";
+import { PiFlagBannerBold } from "react-icons/pi";
 
 export type ISidebar = {
     label: string;
@@ -36,6 +37,12 @@ const LIST_SIDEBAR_ADMIN = [
         id: "activity",
         href: "/admin/activity",
         icon: <MdOutlinePendingActions className="h-7 w-7" />   
+    },
+    {
+        label: "Banner",
+        id: "Banner",
+        href: "/admin/banner",
+        icon: <PiFlagBannerBold  className="h-7 w-7" />   
     },
     {
         label: "Transaction",

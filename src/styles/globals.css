@@ -12,6 +12,10 @@
   --color-second: #E67E22;
 }
 
+
+
+
+
 /* ///////////////////////////////////////////////// */
 .sidebarawal {
   @apply -translate-x-full lg:translate-x-0 lg:min-w-60 transition-all duration-300;
@@ -21,6 +25,8 @@
   @apply translate-x-0 lg:min-w-20 transition-all duration-300;
 }
 /* ////////////////////////////////////////////////  */
+
+
 
 :root {
   --background: #ffffff;

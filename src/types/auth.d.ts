@@ -17,5 +17,13 @@ interface UserExtended extends User {
     role?: string
 }
 
+interface IUser {
+    _id:string;
+    userName: string;
+    fullName: string;
+    role: string;
+    profilePicture: string;
+}
 
-export {IRegister, ILogin, UserExtended}
+
+export {IRegister, ILogin, UserExtended, IUser}
