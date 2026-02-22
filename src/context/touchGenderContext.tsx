@@ -12,7 +12,7 @@ interface ITouch {
     setTouchGender: (touchGender: {pria: boolean; wanita: boolean; anak: boolean}) => void;
 }
 
-export const TouchGenderFotoContext = createContext<ITouch>({
+export const touchGenderContext = createContext<ITouch>({
     touchGender : {
         pria: false,
         wanita: false,
@@ -23,16 +23,16 @@ export const TouchGenderFotoContext = createContext<ITouch>({
 
 
 const TouchGenderProvider = ({children}: {children: ReactNode}) => {
-    const [touchGender, setTouchGender] = useState({
+    const [touchGender, setTouchGender ] = useState({
         pria: false,
         wanita: false,
         anak: false
     })
 
     return (
-        <TouchGenderFotoContext.Provider value={{touchGender, setTouchGender}}>
+        <touchGenderContext.Provider value={{touchGender, setTouchGender }}>
             {children}
-        </TouchGenderFotoContext.Provider>
+        </touchGenderContext.Provider>
     )
 }
 

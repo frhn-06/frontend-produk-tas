@@ -6,7 +6,7 @@ import { QueryClient , QueryClientProvider } from "@tanstack/react-query";
 import { SessionProvider } from "next-auth/react";
 import ToasterProvider from "@/context/toasterContext";
 import { onErrorHandler } from "@/libs/responsehandler";
-import TouchGenderProvider from "@/context/TouchGenderFotoContext";
+import TouchGenderProvider from "@/context/touchGenderContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {

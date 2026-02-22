@@ -5,7 +5,7 @@ import { cn } from "@heroui/react";
 import { toasterContext } from "@/context/toasterContext";
 
 import Toaster from "@/components/ui/Toaster";
-import { IGender, TouchGenderFotoContext } from "@/context/TouchGenderFotoContext";
+import {IGender, touchGenderContext} from "@/context/touchGenderContext";
 
 
 const fontRaleaway = Raleway({
@@ -30,7 +30,7 @@ const AppShell = (props: TypeProps) => {
 
     const {toaster, setToaster} = useContext(toasterContext);
 
-    const {touchGender, setTouchGender} = useContext(TouchGenderFotoContext);
+    const {touchGender, setTouchGender} = useContext(touchGenderContext);
 
     useEffect(() => {
         const timeOut = setTimeout(() => {
