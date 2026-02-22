@@ -2,6 +2,7 @@ import PageHead from "@/components/commons/PageHead/PageHead"
 import NavbarLayout from "./NavbarLayout";
 import useLandingPageLayout from "./useLandingPageLayout";
 import SloganAtas from "@/components/ui/SloganAtas";
+import FooterLayout from "./FooterLayout";
 
 interface TypeProps {
   title: string;
@@ -24,7 +25,7 @@ const LandingPageLayout = (props: TypeProps) => {
       <section>
         <PageHead title={title} />
 
-        <div className="min-h-900 bg-default-100">
+        <div className=" bg-default-100">
           <SloganAtas />
           
 
@@ -33,6 +34,9 @@ const LandingPageLayout = (props: TypeProps) => {
           <div>
             {children}
           </div>
+
+
+          <FooterLayout />
         </div>
       </section>
     )

@@ -5,6 +5,7 @@ import { cn } from "@heroui/react";
 import { toasterContext } from "@/context/toasterContext";
 
 import Toaster from "@/components/ui/Toaster";
+import { IGender, TouchGenderFotoContext } from "@/context/TouchGenderFotoContext";
 
 
 const fontRaleaway = Raleway({
@@ -29,6 +30,8 @@ const AppShell = (props: TypeProps) => {
 
     const {toaster, setToaster} = useContext(toasterContext);
 
+    const {touchGender, setTouchGender} = useContext(TouchGenderFotoContext);
+
     useEffect(() => {
         const timeOut = setTimeout(() => {
             setToaster({
@@ -39,8 +42,19 @@ const AppShell = (props: TypeProps) => {
         return () => clearTimeout(timeOut);
     },[toaster]);
 
+
+    const handleTouchGender = (touchGender: IGender, set: (touchGender: IGender) => void) => {
+        if(Object.values(touchGender).some(value => value === true)) {
+            set({
+                pria: false,
+                wanita: false,
+                anak: false
+            });
+        }
+    }
+
     return (
-        <main className={cn(fontRubik.className)}>
+        <main className={cn(fontRubik.className)} onTouchStart={() => handleTouchGender(touchGender, setTouchGender)}>
             {children}
             {toaster.type !== "" && <Toaster message={toaster.message} type={toaster.type} /> }  
         </main>

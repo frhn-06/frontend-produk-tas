@@ -6,6 +6,7 @@ import { QueryClient , QueryClientProvider } from "@tanstack/react-query";
 import { SessionProvider } from "next-auth/react";
 import ToasterProvider from "@/context/toasterContext";
 import { onErrorHandler } from "@/libs/responsehandler";
+import TouchGenderProvider from "@/context/TouchGenderFotoContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,9 +34,11 @@ export default function App({ Component, pageProps: {Session, ...pageProps} }: A
       <QueryClientProvider client={queryClient}>
         <HeroUIProvider>
           <ToasterProvider>
-            <AppShell>
-              <Component {...pageProps} />
-            </AppShell>
+            <TouchGenderProvider>
+              <AppShell>
+                <Component {...pageProps} />
+              </AppShell>
+            </TouchGenderProvider>
           </ToasterProvider>
         </HeroUIProvider>
       </QueryClientProvider>

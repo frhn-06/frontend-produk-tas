@@ -33,11 +33,9 @@ const NavbarLayout = (props: TypeProps) => {
 
 
 
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-      <div className='relative'>
-        <Navbar shouldHideOnScroll isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} className='bg-white lg:min-h-24'>
+        <Navbar isBordered className='bg-white lg:min-h-24'>
           <NavbarBrand>
             <Image src={`/images/img/logo/logo-velaro.png`} height={32} />
           </NavbarBrand>
@@ -147,15 +145,16 @@ const NavbarLayout = (props: TypeProps) => {
             </NavbarMenuItem>
           </NavbarMenu>
         </Navbar>
+      // <div className='relative'>
         
-        {/* <div className={cn("hidden lg:flex justify-around items-center absolute min-h-fit w-full py-4 bg-white border-b-1 border-b-default-400/30 scale-y-0 origin-top transition duration-200 hover:scale-y-100", {"scale-y-100" : typeof hoverNav === "string"})} onMouseLeave={handleCloseHover}>
-          {dataActivities?.data?.map((d: IActivity) => (
-            <Link key={`${d._id}`} href={`/product/${hoverNav}?q=${d._id}`}>
-              {d.name as ReactNode}
-            </Link>
-          ))}
-        </div> */}
-      </div>
+      //   {/* <div className={cn("hidden lg:flex justify-around items-center absolute min-h-fit w-full py-4 bg-white border-b-1 border-b-default-400/30 scale-y-0 origin-top transition duration-200 hover:scale-y-100", {"scale-y-100" : typeof hoverNav === "string"})} onMouseLeave={handleCloseHover}>
+      //     {dataActivities?.data?.map((d: IActivity) => (
+      //       <Link key={`${d._id}`} href={`/product/${hoverNav}?q=${d._id}`}>
+      //         {d.name as ReactNode}
+      //       </Link>
+      //     ))}
+      //   </div> */}
+      // </div>
       
 
 
