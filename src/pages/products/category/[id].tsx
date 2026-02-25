@@ -3,6 +3,7 @@
 import ProductPageLayout from "@/components/layouts/ProductPageLayout";
 import ProductsByCategory from "@/components/views/ProductsByCategory";
 import CategoryService from "@/services/category.service";
+import { notFound } from "next/navigation";
 
 
 export async function getServerSideProps(context: {params: {id: string}}) {
@@ -16,9 +17,7 @@ export async function getServerSideProps(context: {params: {id: string}}) {
         }
     } catch {
         return {
-            props: {
-                judul: ""
-            }
+            notFound: true
         }
     }
 } 

@@ -60,7 +60,7 @@ const TabAnak = (props: TypeProps) => {
                   <div key={p._id} className="cursor-pointer">
                     <div className="flex flex-col gap-4">
                       <div className="aspect-square flex items-center overflow-hidden relative">
-                        <Link href={`/product/${p.slug}`}>
+                        <Link href={`/products/${p.slug}`}>
                           <img src={`${p.image}`} alt={p.name} className="w-full object-cover object-center" />
                         </Link>
 

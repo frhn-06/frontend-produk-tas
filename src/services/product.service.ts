@@ -9,6 +9,8 @@ const ProductService = {
 
     findOneById: (id: string) => instance.get(`${endpoint.PRODUCT}/${id}`),
 
+    findOneByٍSlug: (slug: string) => instance.get(`${endpoint.PRODUCT}/${slug}/slug`),
+
     update: (id:string, payload: IProduct) => instance.put(`${endpoint.PRODUCT}/${id}`, payload),
 
     delete: (id: string) => instance.put(`${endpoint.PRODUCT}/${id}/delete`),
