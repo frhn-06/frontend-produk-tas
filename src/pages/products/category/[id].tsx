@@ -2,15 +2,39 @@
 
 import ProductPageLayout from "@/components/layouts/ProductPageLayout";
 import ProductsByCategory from "@/components/views/ProductsByCategory";
-import usePageProductsByCategory from "../../../hooks/usePageProductsByCategory";
+import CategoryService from "@/services/category.service";
 
-const PageProductsByCategory = () => {
+
+export async function getServerSideProps(context: {params: {id: string}}) {
+    const params = context.params;
+    try {
+        const {data} = await CategoryService.findById(`${params.id}`);
+        return {
+            props: {
+                judul: data?.data?.name
+            }
+        }
+    } catch {
+        return {
+            props: {
+                judul: ""
+            }
+        }
+    }
+} 
+
+interface TypeProps {
+    judul: string;
+}
+
+const PageProductsByCategory = (props: TypeProps) => {
 
     const {
-        dataCategory
-    } = usePageProductsByCategory();
+        judul
+    } = props;
+
     return (
-        <ProductPageLayout title={`${dataCategory?.data?.name} | Category` || ""}>
+        <ProductPageLayout title={`${judul} | Category` || ""}>
             <ProductsByCategory />
         </ProductPageLayout>
      
