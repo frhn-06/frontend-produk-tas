@@ -35,7 +35,7 @@ const NavbarLayout = (props: TypeProps) => {
 
 
     return (
-        <Navbar isBordered className='bg-white lg:min-h-24'>
+        <Navbar maxWidth="xl" isBordered className='bg-white lg:min-h-24'>
           <NavbarBrand>
             <Image src={`/images/img/logo/logo-velaro.png`} height={32} />
           </NavbarBrand>
@@ -44,7 +44,7 @@ const NavbarLayout = (props: TypeProps) => {
             {LIST_NAV.map((list) => 
               list.href ? (
                 <NavbarItem key={`${list.id}`} className='relative'>
-                  <Link href={`${list.href}`} className={cn("text-default-700 font-bold hover:text-default-500", {"text-primary": router.pathname.startsWith(list.href)})}>
+                  <Link href={`${list.href}`} className={cn("text-default-700 font-bold hover:text-default-500", {"text-primary": router.pathname === list.href})}>
                     {`${list.label}`}
                   </Link>
                 </NavbarItem>
