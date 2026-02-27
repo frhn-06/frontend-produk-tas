@@ -7,6 +7,7 @@ import { SessionProvider } from "next-auth/react";
 import ToasterProvider from "@/context/toasterContext";
 import { onErrorHandler } from "@/libs/responsehandler";
 import TouchGenderProvider from "@/context/touchGenderContext";
+import SyaratLoginProvider from "@/context/syaratLoginContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,9 +36,11 @@ export default function App({ Component, pageProps: {Session, ...pageProps} }: A
         <HeroUIProvider>
           <ToasterProvider>
             <TouchGenderProvider>
-              <AppShell>
-                <Component {...pageProps} />
-              </AppShell>
+              <SyaratLoginProvider>
+                <AppShell>
+                  <Component {...pageProps} />
+                </AppShell>
+              </SyaratLoginProvider>
             </TouchGenderProvider>
           </ToasterProvider>
         </HeroUIProvider>

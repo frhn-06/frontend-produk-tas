@@ -21,7 +21,7 @@ const Toaster = (props: TypeProps) => {
     } = props;
 
     return (
-        <div className="flex gap-2 items-center justify-between w-fit max-w-62 p-2 rounded-xl shadow-md shadow-default fixed top-5 right-5 bg-white z-20">
+        <div className="flex gap-2 items-center justify-between w-fit max-w-62 p-2 rounded-xl shadow-md shadow-default fixed top-5 right-5 bg-white z-50">
           {listToaster[type]}
           <p className={cn( {"text-success" : type === "success", "text-danger" : type === "error"} )}>
             {message}

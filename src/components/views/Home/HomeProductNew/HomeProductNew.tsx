@@ -1,3 +1,4 @@
+import StarUi from "@/components/ui/StarUi";
 import { IProduct } from "@/types/product";
 import convert from "@/utils/convert";
 import {  cn, Skeleton } from "@heroui/react";
@@ -22,7 +23,7 @@ const HomeProductFeatured = (props: TypeProps) => {
             <h1 className="font-bold text-xl lg:text-2xl text-primary">
               Last Product
             </h1>
-            <Link href="" className="text-default-500 font-semibold hover:underline ">
+            <Link href="/products" className="text-default-500 font-semibold hover:underline ">
               Selengkapnya
             </Link>
           </div>
@@ -32,7 +33,7 @@ const HomeProductFeatured = (props: TypeProps) => {
                 <div key={`${p._id}`} className="cursor-pointer">
                   <div className="flex flex-col gap-4">
                     <div className="aspect-square flex items-center overflow-hidden relative">
-                      <Link href={`/product/${p.slug}`}>                      
+                      <Link href={`/products/${p.slug}`}>                      
                         <img src={`${p.image}`} alt="foto" className="w-full object-cover object-center" />
                       </Link>
                       <div className="bg-default-900 absolute top-0 left-0 px-1">
@@ -48,16 +49,10 @@ const HomeProductFeatured = (props: TypeProps) => {
                       <p className="font-bold text-sm">
                         {convert.IDR(Number(p.price))}
                       </p>
-                      <div className="flex gap-2 items-center text-default-700">
-                        {p.totalComment !== 0 ? (
-                          <IoStar className="" /> 
-                        ) : (
-                          <FaRegStar />
-                        )}
-                      </div>
+                      <StarUi dataStar={p?.starsAgr as number} size="sm" comment={p.totalComment} text="sm" disabledComment />
                       <p className="text-sm text-default-500">
                         ({p.totalComment} review)
-                      </p>
+                      </p> 
                     </div>
                   </div>
                 </div>

@@ -7,6 +7,7 @@ import { IoStar } from 'react-icons/io5';
 import useTabAnak from './useTabAnak';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import StarUi from '@/components/ui/StarUi';
 
 
 
@@ -70,10 +71,7 @@ const TabAnak = () => {
                           {convert.IDR(Number(p.price))}
                         </p>
 
-                        <div className="flex gap-2 items-center text-default-700">
-                          {p.totalComment !== 0 ? <IoStar /> : <FaRegStar />}
-                        </div>
-
+                        <StarUi dataStar={p?.starsAgr as number} size="sm" comment={p.totalComment} text="sm" disabledComment />
                         <p className="text-sm text-default-500">
                           ({p.totalComment} review)
                         </p>

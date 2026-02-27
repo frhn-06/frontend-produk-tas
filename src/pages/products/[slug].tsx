@@ -1,4 +1,5 @@
 import LandingPageLayout from "@/components/layouts/LandingPageLayout";
+import Product from "@/components/views/Product";
 import ProductService from "@/services/product.service";
 import { IProduct } from "@/types/product";
 import { notFound } from "next/navigation";
@@ -29,9 +30,7 @@ const PageProduct = (props: TypeProps) => {
 
     return (
         <LandingPageLayout title={`${data.slug}`}>
-            <div>
-
-            </div>
+           <Product data={data} />
         </LandingPageLayout>
     )
 }

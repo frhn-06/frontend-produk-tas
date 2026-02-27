@@ -1,11 +1,13 @@
 import { ReactNode, useContext, useEffect } from "react";
 
 import {Raleway, Rubik} from 'next/font/google';
-import { cn } from "@heroui/react";
+import { cn, useDisclosure } from "@heroui/react";
 import { toasterContext } from "@/context/toasterContext";
 
 import Toaster from "@/components/ui/Toaster";
 import {IGender, touchGenderContext} from "@/context/touchGenderContext";
+import SyaratLoginProvider, { syaratLoginContext } from "@/context/syaratLoginContext";
+import SyaratLogin from "@/components/ui/SyaratLogin";
 
 
 const fontRaleaway = Raleway({
@@ -32,6 +34,8 @@ const AppShell = (props: TypeProps) => {
 
     const {touchGender, setTouchGender} = useContext(touchGenderContext);
 
+    const {syaratLogin, setSyaratLogin} = useContext(syaratLoginContext);
+
     useEffect(() => {
         const timeOut = setTimeout(() => {
             setToaster({
@@ -53,10 +57,15 @@ const AppShell = (props: TypeProps) => {
         }
     }
 
+    const modalSyaratLogin = useDisclosure();
+
     return (
         <main className={cn(fontRubik.className)} onTouchStart={() => handleTouchGender(touchGender, setTouchGender)}>
             {children}
-            {toaster.type !== "" && <Toaster message={toaster.message} type={toaster.type} /> }  
+
+            {toaster.type !== "" && <Toaster message={toaster.message} type={toaster.type} /> }
+
+            {syaratLogin.isOpen  && <SyaratLogin isOpen={syaratLogin.isOpen} onClose={modalSyaratLogin.onClose} setSyaratLogin={setSyaratLogin} type={syaratLogin.type} />}
         </main>
     )
 }
