@@ -36,7 +36,7 @@ const Login = () => {
             )} />
             
             <Button type="submit" color="primary" variant="solid" disabled={isPendingMutateLogin}>
-              {isPendingMutateLogin ? <Spinner color="default" size="sm" /> : "Register"}
+              {isPendingMutateLogin ? <Spinner color="default" size="sm" /> : "Login"}
             </Button>
           </form>
           <p>

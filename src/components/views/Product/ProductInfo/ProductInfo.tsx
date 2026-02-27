@@ -1,7 +1,9 @@
 import StarUi from "@/components/ui/StarUi";
+import { syaratLoginContext } from "@/context/syaratLoginContext";
 import { IProduct } from "@/types/product"
 import convert from "@/utils/convert"
 import { Button, Card, CardBody, CardHeader } from "@heroui/react"
+import { useContext } from "react";
 
 interface TypeProps {
   data: IProduct;
@@ -11,6 +13,15 @@ const ProductInfo = (props: TypeProps) => {
     const {
       data
     } = props;
+
+    const {setSyaratLogin} = useContext(syaratLoginContext);
+
+    const handleBuy = () => {
+      setSyaratLogin({
+        isOpen: true,
+        type: "pembelian"
+      })
+    }
 
     return (
         
@@ -47,7 +58,7 @@ const ProductInfo = (props: TypeProps) => {
               )}
 
               <div className="flex gap-4 my-4">
-                <Button color="primary" variant="solid">
+                <Button color="primary" variant="solid" onPress={() => handleBuy()}>
                   Buy Now
                 </Button>
                 <Button color="primary" variant="flat">
