@@ -5,7 +5,9 @@ const convert = {
             currency: "IDR",
         }).format(angka);
 
-        return rupiah;
+        const [angkaKanggo, buang] = rupiah.split(",");
+
+        return angkaKanggo;
     },
 
     time(waktuAwal: string) {

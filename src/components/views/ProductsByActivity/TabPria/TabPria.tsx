@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { IActivity } from '@/types/activity';
 import StarUi from '@/components/ui/StarUi';
+import CardProduct from '@/components/ui/CardProduct';
 
 
 
@@ -59,34 +60,7 @@ const TabPria = (props: TypeProps) => {
               ) : (
                 dataProductsByPriaByActivity?.data?.map((p: IProduct) => (
                   <div key={p._id} className="cursor-pointer">
-                    <div className="flex flex-col gap-4">
-                      <div className="aspect-square flex items-center overflow-hidden relative">
-                        <Link href={`/products/${p.slug}`}>
-                          <img src={`${p.image}`} alt={p.name} className="w-full object-cover object-center" />
-                        </Link>
-
-                        <div className="bg-default-900 absolute top-0 left-0 px-1">
-                          <span className="text-default-100 text-sm font-500">
-                            {activity?.name}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div>
-                        <h1 className="lg:text-lg text-default-700 line-clamp-1">
-                          {p.name}
-                        </h1>
-
-                        <p className="font-bold text-sm text-default-700">
-                          {convert.IDR(Number(p.price))}
-                        </p>
-
-                        <StarUi dataStar={p?.starsAgr as number} size="sm" comment={p.totalComment} text="sm" disabledComment />
-                        <p className="text-sm text-default-500">
-                          ({p.totalComment} review)
-                        </p>
-                      </div>
-                    </div>
+                    <CardProduct data={p} label={`${activity?.name} - men`} />
                   </div>
                 ))
               ) : (

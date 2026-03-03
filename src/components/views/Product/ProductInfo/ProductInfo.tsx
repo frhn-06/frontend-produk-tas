@@ -3,7 +3,9 @@ import { syaratLoginContext } from "@/context/syaratLoginContext";
 import { IProduct } from "@/types/product"
 import convert from "@/utils/convert"
 import { Button, Card, CardBody, CardHeader } from "@heroui/react"
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import useCart from "@/hooks/cart";
 
 interface TypeProps {
   data: IProduct;
@@ -14,14 +16,47 @@ const ProductInfo = (props: TypeProps) => {
       data
     } = props;
 
+    const {
+      handleAddToCart,
+      isSuccessAddtoCart,
+      refetchCarts
+    } = useCart()
+
+
     const {setSyaratLogin} = useContext(syaratLoginContext);
 
+    const session = useSession();
+
     const handleBuy = () => {
+      if(session.status === "authenticated") {
+        console.log("asu");
+        return;
+      }
+
       setSyaratLogin({
         isOpen: true,
         type: "pembelian"
       })
     }
+
+    const onAddToCart = (id:string) => {
+      if(session.status === "authenticated") {
+        handleAddToCart(id);
+        return;
+      }
+
+      setSyaratLogin({
+        isOpen: true,
+        type: "penambahann keranjang"
+      })
+    }
+
+    useEffect(() => {
+      if(isSuccessAddtoCart) {
+        refetchCarts();
+      }
+    }, [isSuccessAddtoCart])
+
 
     return (
         
@@ -61,7 +96,7 @@ const ProductInfo = (props: TypeProps) => {
                 <Button color="primary" variant="solid" onPress={() => handleBuy()}>
                   Buy Now
                 </Button>
-                <Button color="primary" variant="flat">
+                <Button color="primary" variant="flat" onPress={() => onAddToCart(`${data?._id}`)}>
                   Add to Cart
                 </Button>
               </div>
