@@ -1,5 +1,5 @@
 
-import { Avatar, Badge, cn, Image, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Spinner} from '@heroui/react';
+import { Avatar, Badge, cn, Image, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Skeleton, Spinner} from '@heroui/react';
 import Link from 'next/link';
 import { FaRegUser } from 'react-icons/fa';
 import { MdOutlineShoppingCart } from 'react-icons/md';
@@ -80,7 +80,9 @@ const NavbarLayout = (props: TypeProps) => {
               <NavbarItem className="hidden lg:flex">
                 {session.status === "authenticated" ? (
                   <div className='relative group'>
-                    <Avatar src={`${user?.profilePicture}`} showFallback name={`${user?.fullName}`} className='group'/>
+                    <Skeleton className='rounded-full' isLoaded={!isLoadingUser}>
+                      <Avatar src={`${user?.profilePicture}`} showFallback name={`${user?.fullName}`} className='group'/>
+                    </Skeleton>
                     <div className='absolute top-full min-w-24 bg-white min-h-12 rounded-2xl shadow scale-0 transition duration-250 group-hover:scale-100 p-4 flex flex-col gap-1'>
                       <Link href="/admin/dashboard" className='p-2 rounded-xl hover:bg-default-400/30'>
                         Dashboard
@@ -141,9 +143,11 @@ const NavbarLayout = (props: TypeProps) => {
                 {session.status === "authenticated" ? ( 
                   user?.role === "admin" ? (
                     <div className='flex flex-col gap-2'>
-                      <Link href={`/admin/profile/${user?._id}`}>
-                        <Avatar src={`${user?.profilePicture}`} showFallback name={`${user?.fullName}`} className='group'/> 
-                      </Link>
+                      <Skeleton>
+                        <Link href={`/admin/profile/${user?._id}`}>
+                          <Avatar src={`${user?.profilePicture}`} showFallback name={`${user?.fullName}`} className='group'/> 
+                        </Link>
+                      </Skeleton>
                       <Link href="/admin/dashboard" className='text-default-700 font-semibold '>
                         Dashboard
                       </Link> 

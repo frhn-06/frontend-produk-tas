@@ -33,13 +33,13 @@ const PlusMinusAngka = (props: TypeProps) => {
 
     return (
       <div className={cn("flex items-center justify-between bg-gray-200 rounded-lg", { "h-8" :size === "sm", "h-10" :size === "md" ,"h-12" :size === "lg"})}>
-        <button className="p-3 rounded-lg text-default-700 disabled:text-default-400" disabled={angka === 1} onClick={() => handleMin(angka)}>
+        <button className="p-3 rounded-lg text-default-700 disabled:text-default-400 active:bg-default-400" disabled={angka === 1} onClick={() => handleMin(angka)}>
           <FaMinus className={cn("cursor-pointer", {"h-3 w-3": size === "sm", "h-4 w-4": size === "md", "h-5 w-5": size === "lg" })} />
         </button>
         <div className="p-3 rounded-lg text-default-700">
           {angka}
         </div>
-        <button className="p-3 rounded-lg text-default-700 disabled:text-default-400" onClick={() => handlePlus(angka)}>
+        <button className="p-3 rounded-lg text-default-700 disabled:text-default-400 active:bg-default-400" onClick={() => handlePlus(angka)}>
           <FaPlus className={cn("cursor-pointer", {"h-3 w-3": size === "sm", "h-4 w-4": size === "md", "h-5 w-5": size === "lg" })} />
         </button>
       </div>
