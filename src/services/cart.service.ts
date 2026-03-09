@@ -14,6 +14,8 @@ const CartService = {
     min: (id: string) => instance.put(`${endpoint.CART}/${id}/min`),
 
     delete: (id: string) => instance.delete(`${endpoint.CART}/${id}`),
+
+    deleteAll: () => instance.delete(`/delete-all-carts`)
 }
 
 export default CartService;

@@ -6,7 +6,8 @@ const endpoint = {
     ACTIVITY: "/activity",
     BANNER: "/banner",
     REVIEW: "/review",
-    CART: "/cart"
+    CART: "/cart",
+    ORDERS: "/orders"
 }
 
 export default endpoint;

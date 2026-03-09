@@ -33,14 +33,14 @@ const NavbarLayout = (props: TypeProps) => {
     const {
       dataCarts,
       isLoadingCarts,
-      isRefetchingCarts
+      isRefetchingCarts,
+      refetchCarts
     } = useCart();
 
     const router = useRouter();
 
     const session = useSession();
 
-  
 
 
     
