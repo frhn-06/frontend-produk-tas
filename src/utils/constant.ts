@@ -26,4 +26,11 @@ const paginationC = [
     }
 ]
 
-export {limitC, paginationC}
+const statusC = [
+    {name: "All Status", id: "allstatus"}, 
+    {name: "Completed", id: "settlement"}, 
+    {name: "Pending", id: "pending"}, 
+    {name: "Expired", id: "expired"}
+]
+
+export {limitC, paginationC, statusC}

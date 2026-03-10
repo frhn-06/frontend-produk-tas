@@ -1,4 +1,4 @@
-import { limitC } from '@/utils/constant';
+import { limitC, statusC } from '@/utils/constant';
 import { Button, Input, Select, SelectItem, Spinner } from '@heroui/react';
 import { ChangeEvent, Key, ReactNode, useMemo } from 'react';
 import { CiSearch } from 'react-icons/ci';
@@ -11,7 +11,7 @@ interface TypeProps {
   renderCell: (data: Record<string, unknown>, column: {label: string, id: string}) => ReactNode;
   data: Record<string, unknown>[];
   isLoading: boolean;
-  isSuccess: boolean;
+  isSuccess?: boolean;
 
   textEmpty: string;
   currentSearch?: string;
@@ -24,18 +24,23 @@ interface TypeProps {
 
   onSearch?: (e: ChangeEvent<HTMLInputElement>) => void;
   onClearSearch?: () => void;
-  onLimit: (e: ChangeEvent<HTMLSelectElement>) => void;
-  limit: string;
-  currentPage: number;
-  pagination: IPagination;
-  onPagination: (e:number) => void;
+
+  onLimit?: (e: ChangeEvent<HTMLSelectElement>) => void;
+  limit?: string;
+  currentPage?: number;
+  pagination?: IPagination;
+  onPagination?: (e:number) => void;
 
   showLimit?: boolean;
   showPagination?: boolean;
 
   onOpenModal?: () => void;
 
-  isTableDelete?: boolean
+  isTableDelete?: boolean;
+
+  ShowStatus?: boolean;
+  status?: string;
+  onStatus?: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 
@@ -68,7 +73,11 @@ const TableUi = (props: TypeProps) => {
 
     onOpenModal,
 
-    isTableDelete
+    isTableDelete,
+
+    ShowStatus,
+    status,
+    onStatus
   } = props;
 
   
@@ -83,15 +92,31 @@ const TableUi = (props: TypeProps) => {
             {textCreate}
           </Button>
         )}
+        {ShowStatus && (
+          <Select
+            className='max-w-[10%] bg-white rounded-2xl' 
+            size='md' 
+            variant='bordered'
+            items={statusC}
+            selectedKeys={status ? [status] : [""]}
+            onChange={onStatus}
+          >
+            {statusC.map(s => (
+              <SelectItem key={`${s.id}`}>
+                {`${s.name}`}
+              </SelectItem>
+            ))}
+          </Select>
+        )}
       </div>
     )
-  },[showSearch, showCreate, textCreate, currentSearch, onSearch, onClearSearch, onOpenModal, placeholderSearch]);
+  },[showSearch, showCreate, textCreate, currentSearch, onSearch, onClearSearch, onOpenModal, placeholderSearch, ShowStatus, status, onStatus]);
 
 
   const bottomContent = useMemo(() => {
     return (
       <div className='flex justify-between'>
-        {showLimit && (
+        {showLimit && limit && (
           <Select
             variant='bordered'
             size='md'
@@ -107,7 +132,9 @@ const TableUi = (props: TypeProps) => {
           </Select>
         )}
 
-        <Pagination showControls isCompact onChange={onPagination} initialPage={pagination?.current} total={pagination?.totalPage} className='mx-auto' />
+        {pagination && (
+          <Pagination showControls isCompact onChange={onPagination} initialPage={pagination?.current} total={pagination?.totalPage} className='mx-auto' />
+        )}
       </div>
     )
   }, [limitC, limit, onLimit, currentPage, pagination, onPagination, showLimit, onPagination])

@@ -21,6 +21,7 @@ interface IUser {
     _id:string;
     userName: string;
     fullName: string;
+    email?: string;
     role: string;
     profilePicture: string;
 }

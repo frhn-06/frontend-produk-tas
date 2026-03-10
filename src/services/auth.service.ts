@@ -15,7 +15,9 @@ const AuthService = {
         }
     }),
 
-    me: () => instance.get(`${endpoint.AUTH}/me`)
+    me: () => instance.get(`${endpoint.AUTH}/me`),
+
+    getUserById: (id: string) => instance.get(`${endpoint.AUTH}/${id}/user`)
 }
 
 export default AuthService;

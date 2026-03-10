@@ -10,6 +10,11 @@ const convert = {
         return angkaKanggo;
     },
 
+    time1(waktuAwal: string) {
+        const date = new Date(waktuAwal);
+        return date.toLocaleString("id-ID")
+    },
+
     time(waktuAwal: string) {
         const now = new Date();
         const waktuUpload = new Date(waktuAwal);
