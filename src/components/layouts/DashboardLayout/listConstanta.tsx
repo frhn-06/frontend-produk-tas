@@ -66,6 +66,12 @@ const LIST_SIDEBAR_MEMBER = [
         href: "/member/profile",
         icon: <MdOutlineManageAccounts className="h-7 w-7" />   
     },
+    {
+        label: "Transaction",
+        id: "transaction",
+        href: "/member/transaction",
+        icon: <IoWalletOutline className="h-7 w-7" />   
+    },
 ]
 
 

@@ -84,8 +84,8 @@ const NavbarLayout = (props: TypeProps) => {
                       <Avatar src={`${user?.profilePicture}`} showFallback name={`${user?.fullName}`} className='group'/>
                     </Skeleton>
                     <div className='absolute top-full min-w-24 bg-white min-h-12 rounded-2xl shadow scale-0 transition duration-250 group-hover:scale-100 p-4 flex flex-col gap-1'>
-                      <Link href="/admin/dashboard" className='p-2 rounded-xl hover:bg-default-400/30'>
-                        Dashboard
+                      <Link href={user?.role === "admin" ? "/admin/dashboard" : "/member/profile"} className='p-2 rounded-xl hover:bg-default-400/30'>
+                        {user?.role === "admin" ? "Dashboard" : "Profile"}
                       </Link>
                       <p onClick={() => signOut()} className='cursor-pointer p-2 rounded-xl hover:bg-default-400/30'>
                         Logout
