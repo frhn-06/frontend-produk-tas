@@ -18,13 +18,22 @@ interface UserExtended extends User {
 }
 
 interface IUser {
-    _id:string;
-    userName: string;
-    fullName: string;
+    _id?:string;
+    userName?: string;
+    fullName?: string;
     email?: string;
-    role: string;
-    profilePicture: string;
+    role?: string;
+    profilePicture?: string;
+    phone?: string;
+    address?: string;
+    coodinate?: number[];
+}
+
+interface IPassword {
+    oldPassword: string;
+    password: string;
+    confirmPassword: string;
 }
 
 
-export {IRegister, ILogin, UserExtended, IUser}
+export {IRegister, ILogin, UserExtended, IUser, IPassword}

@@ -8,6 +8,7 @@ import ToasterProvider from "@/context/toasterContext";
 import { onErrorHandler } from "@/libs/responsehandler";
 import TouchGenderProvider from "@/context/touchGenderContext";
 import SyaratLoginProvider from "@/context/syaratLoginContext";
+// import "leaflet/dist/leaflet.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
