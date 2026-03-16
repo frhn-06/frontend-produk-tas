@@ -63,15 +63,15 @@ const Dashboard = () => {
 					</div>
 
 					<div className="mt-8 flex flex-col lg:flex-row gap-4">
-							<div className="flex-2">
-								<LineChart style={{ width: '100%', aspectRatio: 1.618 }} responsive data={dataDashboardAdmin?.data?.revenueChart} className=" bg-white rounded-2xl shadow-lg p-4">
-									<CartesianGrid />
-									<Line dataKey="revenue" dot={{ r:6 }} />
-									<XAxis dataKey="month" />
-									<YAxis />
-									<Legend />
-								</LineChart>
-							</div>
+						<div className="flex-2">
+							<LineChart style={{ width: '100%', aspectRatio: 1.618 }} responsive data={dataDashboardAdmin?.data?.revenueChart} className=" bg-white rounded-2xl shadow-lg p-4">
+								<CartesianGrid />
+								<Line dataKey="revenue" dot={{ r:6 }} />
+								<XAxis dataKey="month" />
+								<YAxis />
+								<Legend />
+							</LineChart>
+						</div>
 
 						<div className="lg:flex-1 w-full min-h-24 flex flex-col gap-2">
 							<h2 className="text-default-700 font-bold text-xl">
