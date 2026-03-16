@@ -13,4 +13,12 @@ interface IDataOrder {
     orderId?: string;
 }
 
-export type {IOrder, IDataOrder};
+interface IProductsInOrder {
+    productId: Record<string, unknown>,
+    name: string;
+    price: number;
+    quantity: number;
+    _id: string
+}
+
+export type {IOrder, IDataOrder, IProductsInOrder};
