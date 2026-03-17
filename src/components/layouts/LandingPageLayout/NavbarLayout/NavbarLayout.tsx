@@ -1,5 +1,5 @@
 
-import { Avatar, Badge, cn, Image, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Skeleton, Spinner} from '@heroui/react';
+import { Avatar, Badge, Button, cn, Image, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Skeleton} from '@heroui/react';
 import Link from 'next/link';
 import { FaRegUser } from 'react-icons/fa';
 import { MdOutlineShoppingCart } from 'react-icons/md';
@@ -9,7 +9,6 @@ import { IActivity } from '@/types/activity';
 import { useRouter } from 'next/router';
 import { IUser } from '@/types/auth';
 import { signOut, useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
 import useCart from '@/hooks/cart';
 
 
@@ -48,7 +47,9 @@ const NavbarLayout = (props: TypeProps) => {
         <>
           <Navbar maxWidth="xl" isBordered className='bg-white lg:min-h-24'>
             <NavbarBrand>
-              <Image src={`/images/img/logo/logo-velaro.png`} height={32} />
+              <Link href={'/'}>
+                <Image src={`/images/img/logo/logo-velaro.png`} height={32} />
+              </Link>
             </NavbarBrand>
 
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
@@ -65,9 +66,9 @@ const NavbarLayout = (props: TypeProps) => {
                       {`${list.label}`}
                     </span>
                     <div className={cn("absolute top-full bg-white scale-y-0 origin-top transition duration-250 p-4 rounded-2xl flex flex-col gap-1 min-w-36 shadow group-hover:scale-y-100")}>
-                      {dataActivities?.data?.map((d: IActivity) => (
-                        <Link key={d._id} href={`/product/${list.id}?q=${d._id}`} className='font-semibold text-default-700 hover:bg-default-400/30 rounded-xl p-2'>
-                          {d.name}
+                      {dataActivities?.data?.map((activity: IActivity) => (
+                        <Link key={activity._id} href={`/products/activity/${activity._id}?target=${list.id}`} className='font-semibold text-default-700 hover:bg-default-400/30 rounded-xl p-2'>
+                          {activity.name}
                         </Link>
                       ))}
                     </div>
@@ -93,7 +94,7 @@ const NavbarLayout = (props: TypeProps) => {
                     </div>
                   </div>
                 ) : (
-                  <Link href="/auth/login">
+                  <Link href="/auth/login" className='active:bg-default-200 rounded-xl p-1'>
                     <FaRegUser className='text-primary w-6 h-6' />
                   </Link>
                 )}
@@ -101,12 +102,12 @@ const NavbarLayout = (props: TypeProps) => {
               <NavbarItem className="flex">
                 {session.status === "authenticated" ? (
                   <Badge color='danger' content={dataCarts?.data ?`${dataCarts?.data?.length}` : ""} placement='top-right'>
-                    <Link href="/checkout/cart" className='relative'>
+                    <Link href="/checkout/cart" className='relative p-1 rounded-xl active:bg-default-200'>
                       <MdOutlineShoppingCart className='text-primary w-7 h-7' />
                     </Link>
                   </Badge>
                 ) : dataCarts?.data?.length === 0 || session.status === "unauthenticated" && (
-                  <Link href="/checkout/cart" className='relative'>
+                  <Link href="/checkout/cart" className='relative p-1 rounded-xl active:bg-default-200'>
                     <MdOutlineShoppingCart className='text-primary w-7 h-7' />
                   </Link>
                 )}
@@ -143,22 +144,35 @@ const NavbarLayout = (props: TypeProps) => {
                 {session.status === "authenticated" ? ( 
                   user?.role === "admin" ? (
                     <div className='flex flex-col gap-2'>
-                      <Skeleton>
-                        <Link href={`/admin/profile/${user?._id}`}>
+                      <Skeleton isLoaded={!!user} className='w-fit'>
+                        <Link href={`/admin/profile`} onClick={(e) => e.preventDefault()}>
                           <Avatar src={`${user?.profilePicture}`} showFallback name={`${user?.fullName}`} className='group'/> 
                         </Link>
                       </Skeleton>
-                      <Link href="/admin/dashboard" className='text-default-700 font-semibold '>
+                      <Link href="/admin/dashboard" className='text-default-700 font-semibold rounded-xl p-1 active:bg-default-200'>
                         Dashboard
-                      </Link> 
+                      </Link>
+                      <Button color='primary' variant='flat' onPress={() => signOut()}>
+                        Logout
+                      </Button>
                     </div>
                     ) : (
-                      <Link href={`/member/profile/${user?._id}`} >
-                        <Avatar src={`${user?.profilePicture}`} showFallback name={`${user?.fullName}`} className='group'/> 
-                      </Link>
+                      <div className='flex flex-col gap-2'>
+                        <Skeleton isLoaded={!!user} className='w-fit'>
+                          <Link href={`/member/profile`} >
+                            <Avatar src={`${user?.profilePicture}`} showFallback name={`${user?.fullName}`} className='group'/> 
+                          </Link>
+                        </Skeleton>
+                        <Link href="/member/dashboard" className='text-default-700 font-semibold rounded-xl p-1 active:bg-default-200'>
+                          Dashboard
+                        </Link>
+                        <Button color='primary' variant='flat' onPress={() => signOut()}>
+                          Logout
+                        </Button>
+                      </div>
                     )     
                   ) : (
-                  <Link href="/auth/login" className='flex gap-2 '>
+                  <Link href="/auth/login" className='flex gap-2 rounded-xl p-2 active:bg-default-200'>
                     <FaRegUser className='text-primary w-6 h-6' /> Login
                   </Link>
                 )}

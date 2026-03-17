@@ -28,7 +28,7 @@ const HomeCategory = (props: TypeProps) => {
           <CardBody>
             <div className="grid auto-cols-[8rem] grid-flow-col gap-4 overflow-x-auto lg:grid-cols-8">
               {router.isReady && !isLoading && !!data && Array.isArray(data) ? data?.map((c: ICategory) => (
-                <Link key={`${c._id}`} href={`/product?category=${c._id}`} className="bg-gray-500 p-1 rounded-xl flex items-center justify-center">
+                <Link key={`${c._id}`} href={`/products/category/${c._id}`} className="bg-gray-500 p-1 rounded-xl flex items-center justify-center">
                   <Image src={`${c.icon}`} className="aspect-square " />
                 </Link>                
               )) : (

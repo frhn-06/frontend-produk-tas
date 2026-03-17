@@ -49,7 +49,7 @@ const LIST_SIDEBAR_ADMIN = [
         id: "transaction",
         href: "/admin/transaction",
         icon: <IoWalletOutline className="h-7 w-7" />   
-    },
+    }
 ]
 
 

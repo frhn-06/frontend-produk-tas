@@ -1,9 +1,11 @@
+import ActivityService from "@/services/activity.service";
 import BannerService from "@/services/banner.service";
 import CategoryService from "@/services/category.service";
 import ProductService from "@/services/product.service";
 import { useQuery } from "@tanstack/react-query";
 import { param } from "framer-motion/client";
 import { useRouter } from "next/router";
+import { Activity } from "react";
 
 const useHome = () => {
     const router = useRouter();
@@ -44,6 +46,18 @@ const useHome = () => {
     })
 
 
+    const getActivities = async () => {
+        const {data} = await ActivityService.findAll('limit=3');
+        return data;
+    }
+
+
+    const {data:dataActivities, isLoading:isLoadingActivities} = useQuery({
+        queryKey: ["Activity"],
+        queryFn: getActivities,
+        enabled: true
+    })
+
     
 
     return {
@@ -54,7 +68,10 @@ const useHome = () => {
         isLoadingCategories,
 
         dataNewProducts,
-        isLoadingNewProducts
+        isLoadingNewProducts,
+
+        dataActivities,
+        isLoadingActivities
     }
 }
 

@@ -3,8 +3,8 @@ import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa"
 
 const FooterLayout = () => {
     return (
-      <div className="bg-[#0c2c41] flex flex-col gap-4 pt-4">
-        <div className="max-w-7xl mx-auto">
+      <div className="bg-[#0c2c41] flex flex-col gap-4 pt-4 lg:px-8">
+        <div className="">
           <div className="py-4 flex flex-col lg:flex-row gap-4 justify-between w-full items-center">
             <div className="flex-1 flex flex-col gap-4 items-center lg:items-start text-center lg:text-start w-2/3">
               <Image src={"/images/svg/logo/logo-velaro.svg"} className="w-full" />

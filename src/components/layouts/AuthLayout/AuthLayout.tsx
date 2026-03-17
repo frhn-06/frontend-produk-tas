@@ -1,6 +1,7 @@
 import PageHead from "@/components/commons/PageHead/PageHead"
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface TypeProps {
   title: string;
@@ -23,6 +24,9 @@ const AuthLayout = (props: TypeProps) => {
               </div>
               {children}        
             </div>
+            <Link href="/" className="absolute bottom-2 right-2 text-primary underline">
+              Home
+            </Link>
           </section>
         </>
     )

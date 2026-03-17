@@ -1,14 +1,9 @@
 import PageHead from "@/components/commons/PageHead/PageHead";
 import SidebarDashboardLayout from "./SidebarDashboardLayout";
 import { LIST_SIDEBAR_ADMIN, LIST_SIDEBAR_MEMBER } from "./listConstanta";
-import { ReactNode, useCallback, useEffect, useMemo, useState } from "react";
+import { ReactNode, useState } from "react";
 import Burger from "@/components/ui/Burger";
-import { Avatar, cn } from "@heroui/react";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { Session } from "inspector/promises";
-import useDashboard from "./useDashboardLayout";
-import Link from "next/link";
 
 interface TypeProps {
   title: string;
@@ -27,36 +22,13 @@ const DashboardLayout = (props: TypeProps) => {
       description
     } = props;
 
-    const {
-      dataUser,
-      isLoading
-    } = useDashboard();
 
     const router = useRouter();
     
 
     const [isOpenSidebar, setIsOpenSidebar] = useState(true);
 
-    const [openProfile, setOpenProfile] = useState(true);
 
-
-    const avatar = useMemo(() => {
-      return (
-        <>
-          <Avatar className="group" src={`${dataUser?.data?.profilePicture}`} showFallback name={dataUser?.data?.fullName} onClick={() => setOpenProfile(!openProfile)} />
-
-          {dataUser?.data && (
-            <div className={cn("transition-all duration-300 min-w-20 p-4 bg-white rounded-xl shadow-md absolute top-full right-0", {"scale-1" : openProfile,"scale-0.5" : !openProfile})}>
-              <div className="rounded-lg hover:bg-default-200 p-2">
-                <Link href={`/${type}/profile`} className="leading-0" >
-                  {dataUser?.data?.userName}
-                </Link>
-              </div>
-            </div>
-          )}
-        </>
-      )
-    },[dataUser, openProfile, type])
 
     return (
         <section>
@@ -70,9 +42,8 @@ const DashboardLayout = (props: TypeProps) => {
                 <div className="min-h-20 w-full bg-white shadow-lg flex justify-between items-center px-4 rounded-2xl">
                   <div>
                     <h1 className="text-xl font-bold text-default-700">
-                      {router.pathname.startsWith("/admin/dashboard") || router.pathname.startsWith("/member/dashboard") ?
-                        dataUser?.data?.fullName !== undefined && 
-                        `Halo ${dataUser?.data?.fullName}` :
+                      {router.pathname.startsWith("/admin/dashboard") || router.pathname.startsWith("/member/dashboard") ? 
+                        "Dashboard" :
                         `${titleHead}`
                       }
                     </h1>
@@ -86,8 +57,6 @@ const DashboardLayout = (props: TypeProps) => {
                   <div className="flex gap-2 items-center relative flex-row-reverse lg:flex-row">
                     <Burger isOpen={isOpenSidebar} setOpen={setIsOpenSidebar} size="sm" />
 
-
-                    {avatar}
                   </div>
                 </div>
                 

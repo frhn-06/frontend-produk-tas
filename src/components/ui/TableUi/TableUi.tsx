@@ -94,7 +94,7 @@ const TableUi = (props: TypeProps) => {
         )}
         {ShowStatus && (
           <Select
-            className='max-w-[10%] bg-white rounded-2xl' 
+            className='lg:max-w-[10%] bg-white rounded-2xl' 
             size='md' 
             variant='bordered'
             items={statusC}
