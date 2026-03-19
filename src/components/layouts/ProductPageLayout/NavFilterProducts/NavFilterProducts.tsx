@@ -1,7 +1,7 @@
 import { IActivity } from "@/types/activity";
 import { ICategory } from "@/types/category";
 import { cn } from "@/utils/cn";
-import {  BreadcrumbItem, Breadcrumbs, Link } from "@heroui/react";
+import {  BreadcrumbItem, Breadcrumbs, Button, Link } from "@heroui/react";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
 import { FaChevronUp } from "react-icons/fa";
@@ -42,14 +42,7 @@ const NavFilterProducts = (props: TypeProps) => {
             <div className="flex justify-end items-center lg:hidden">
               <IoIosCloseCircleOutline className="text-default-700 h-8 w-8" onClick={() => setOpenNav(!openNav)} />
             </div>
-            {/* <div>
-              <Breadcrumbs color="primary" variant="bordered">
-                <BreadcrumbItem href="/">Home</BreadcrumbItem>
-                <BreadcrumbItem className="font-bold">{router.pathname}</BreadcrumbItem>
-              </Breadcrumbs>
-            </div> */}
-
-           
+      
 
             <div className="border-b-2 border-gray-400/30 px-4">
               <div className="flex justify-between items-center py-1 px-2">
@@ -80,10 +73,20 @@ const NavFilterProducts = (props: TypeProps) => {
               </div>
               <div className={cn("text-sm py-1 px-2 flex flex-col gap-2 justify-around max-h-full overflow-hidden transition duration-200", {"max-h-0": chevron.activities})}>
                 {activities?.map(a => (
-                  <Link key={a._id} href={`/products/activity/${a._id}`} className="text-sm w-full font-semibold text-default-600">
+                  <Link key={a._id} href={`/products/activity/${a._id}`} className={cn("text-sm w-full font-semibold text-default-600", {"text-primary" : router.query.id === a._id})}>
                     {a.name}
                   </Link>
                 ))}
+              </div>
+            </div>
+
+            <div className="px-4">
+              <div className="flex justify-between items-center py-1 px-2">
+                <Link href="/sale-products">
+                  <Button className="text-default-100" color="primary">
+                    Shale Products
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

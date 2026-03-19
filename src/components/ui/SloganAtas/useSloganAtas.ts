@@ -1,8 +1,8 @@
 const useSloganAtas = ( ) => {
     const texts = [
-        "loremddd dddddddddddd ddddddd dddddddddd dddddddd ddddddd ddddddddd dddd ddddddddd dd ddddddddd",
-        "sssssss ssssss lllllllll llllllllllll lllllllfrr rrrr rrrrrrrrrrr rrrrrrr rrrrrrrr rrrr rrrrrr rrrrrrrrrr",
-        "aaaaaa aaaa aaaaaaa aaaa aaaaaeee eeeeeeeeeee eeeeeee eeeeee eeeeeeeee eeeeeeeeeeee eeeeeeee"
+        "Velaro menghadirkan tas dan dompet berkualitas dengan desain elegan yang siap melengkapi gaya kamu setiap hari.",
+        "Dibuat dengan detail dan material pilihan, setiap produk Velaro dirancang untuk kenyamanan dan ketahanan jangka panjang.",
+        "Tingkatkan penampilan dan kepercayaan diri kamu dengan koleksi tas dan dompet Velaro yang modern dan fungsional."
     ]
 
     return {

@@ -18,7 +18,7 @@ const Products = () => {
 
         <>
           <div className="flex justify-between mb-8">
-            <h1 className="font-bold text-4xl text-default-700">
+            <h1 className="font-bold text-3xl lg:text-4xl text-default-700">
               NEW        
             </h1>
           </div>

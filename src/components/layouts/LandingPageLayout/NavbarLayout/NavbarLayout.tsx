@@ -1,5 +1,5 @@
 
-import { Avatar, Badge, Button, cn, Image, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Skeleton} from '@heroui/react';
+import { Avatar, Badge, Button, Card, CardBody, cn, Image, Input, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Skeleton, Spinner} from '@heroui/react';
 import Link from 'next/link';
 import { FaRegUser } from 'react-icons/fa';
 import { MdOutlineShoppingCart } from 'react-icons/md';
@@ -10,6 +10,8 @@ import { useRouter } from 'next/router';
 import { IUser } from '@/types/auth';
 import { signOut, useSession } from 'next-auth/react';
 import useCart from '@/hooks/cart';
+import { IoSearch } from 'react-icons/io5';
+import { IProduct } from '@/types/product';
 
 
 
@@ -27,6 +29,11 @@ const NavbarLayout = (props: TypeProps) => {
     const {
       dataActivities,
       isLoadingActivities,
+
+      dataProductsSearch,
+      isLoadingProductsSearch,
+      handleSearch,
+      search
     } = useNavbarLayout();
 
     const {
@@ -77,7 +84,47 @@ const NavbarLayout = (props: TypeProps) => {
               )}
             </NavbarContent>
 
+
             <NavbarContent justify="end">
+              {/* search */}
+              <NavbarItem className='min-w-26'>
+                <div className='relative'>
+                  <Input type='search' variant='bordered' placeholder='Search Product' onChange={handleSearch} startContent={(
+                    <IoSearch className='text-default-700' />
+                  )} />
+                  {search !== "" && (
+                    <Card className="absolute top-full translate-y-2 min-w-full">
+                      <CardBody className='gap-2 p-2'>
+                        {!isLoadingProductsSearch ? (
+                          Array.isArray(dataProductsSearch?.data) && dataProductsSearch?.data?.length > 0 ? (
+                            dataProductsSearch?.data?.map((product : IProduct) => (
+                              <Link key={product._id} href={`/products/${product.slug}`} className='rounded-2xl p-1 active:bg-default-200'>
+                                <div className='flex gap-4'>
+                                  <div className='w-12 h-12 aspect-square'>
+                                    <Image src={`${product.image}`} alt='image' className='w-full h-full aspect-square' />
+                                  </div>
+                                  <div>
+                                    <h2 className='text-default-500 text-wrap'>
+                                      {product.name}
+                                    </h2>
+                                  </div>
+                                </div>
+                              </Link>
+                            ))
+                          ) : (
+                            <p className='text-default-400'>
+                              products is empty
+                            </p>
+                          )
+                        ) : (
+                          <Spinner color='primary' />
+                        )}
+                      </CardBody>
+                    </Card>
+                  )}
+                </div>
+              </NavbarItem>
+              {/* user */}
               <NavbarItem className="hidden lg:flex">
                 {session.status === "authenticated" ? (
                   <div className='relative group'>
@@ -99,6 +146,7 @@ const NavbarLayout = (props: TypeProps) => {
                   </Link>
                 )}
               </NavbarItem>
+              {/* cart */}
               <NavbarItem className="flex">
                 {session.status === "authenticated" ? (
                   <Badge color='danger' content={dataCarts?.data ?`${dataCarts?.data?.length}` : ""} placement='top-right'>
@@ -119,7 +167,7 @@ const NavbarLayout = (props: TypeProps) => {
 
 
 
-            <NavbarMenu className='bg-white gap-1'>
+            <NavbarMenu className='bg-white gap-1 fixed '>
               {LIST_NAV.map((list, index) => 
                 list.href ? (
                   <NavbarMenuItem key={`${list}-${index}`}>
@@ -143,6 +191,7 @@ const NavbarLayout = (props: TypeProps) => {
               <div className='p-2'>
                 {session.status === "authenticated" ? ( 
                   user?.role === "admin" ? (
+                    // admin
                     <div className='flex flex-col gap-2'>
                       <Skeleton isLoaded={!!user} className='w-fit'>
                         <Link href={`/admin/profile`} onClick={(e) => e.preventDefault()}>
@@ -157,6 +206,7 @@ const NavbarLayout = (props: TypeProps) => {
                       </Button>
                     </div>
                     ) : (
+                      // member
                       <div className='flex flex-col gap-2'>
                         <Skeleton isLoaded={!!user} className='w-fit'>
                           <Link href={`/member/profile`} >

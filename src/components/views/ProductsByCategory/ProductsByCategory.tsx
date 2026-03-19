@@ -1,4 +1,4 @@
-import { Tab, Tabs } from "@heroui/react";
+import { Skeleton, Tab, Tabs } from "@heroui/react";
 import TabPria from "./TabPria";
 import TabWanita from "./TabWanita";
 import TabAnak from "./TabAnak";
@@ -21,9 +21,13 @@ const ProductsByCategory = () => {
         <>
         
           <div className="flex justify-between mb-8">
-            <h1 className="font-bold text-4xl text-default-700">
-              {dataCategory?.data?.name}
-            </h1>
+            {dataCategory?.data?.name ? (
+              <h1 className="font-bold text-3xl lg:text-4xl text-default-700">
+                {dataCategory?.data?.name}
+              </h1>
+            ) : (
+              <Skeleton className="w-46 h-12 rounded-2xl"></Skeleton>
+            )}
           </div>
 
           <div>

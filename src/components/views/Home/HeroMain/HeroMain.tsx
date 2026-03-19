@@ -14,10 +14,10 @@ const HeroMain = () => {
                     <p className="lg:text-lg text-default-100 font-light">
                       Designed for Everyday Movement
                     </p>
-                    <h1 className="font-bold text-2xl lg:text-4xl text-default-800">
+                    <h1 className="font-bold text-xl lg:text-4xl text-default-800">
                       Tas Stylish untuk Aktivitas Tanpa Batas
                     </h1>
-                    <Button as={Link} href="/sale-product" className="w-fit text-default-800" >
+                    <Button as={Link} href="/sale-products" className="w-fit text-sm lg:text-base text-default-800" >
                       Shop Sale
                     </Button>
                   </div>

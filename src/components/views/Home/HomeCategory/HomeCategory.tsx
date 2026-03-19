@@ -21,7 +21,7 @@ const HomeCategory = (props: TypeProps) => {
       <section className="mx-4 lg:mx-8 my-4 py-4">
         <Card className="py-4 px-4 shadow-none">
           <CardHeader className="justify-end">
-            <Link href="" className="text-default-500 font-semibold hover:underline ">
+            <Link href="" className="text-default-500 font-semibold hover:underline text-sm lg:text-base ">
               Selengkapnya
             </Link>
           </CardHeader>

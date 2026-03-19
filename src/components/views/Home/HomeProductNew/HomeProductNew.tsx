@@ -21,10 +21,10 @@ const HomeProductFeatured = (props: TypeProps) => {
     return (
         <section className="mx-4 lg:mx-8 my-4 py-4">
           <div className="flex justify-between">
-            <h1 className="font-bold text-xl lg:text-2xl text-primary">
+            <h1 className="font-bold text-lg lg:text-xl text-primary">
               New Product
             </h1>
-            <Link href="/products" className="text-default-500 font-semibold hover:underline ">
+            <Link href="/products" className="text-default-500 font-semibold text-sm lg:text-base hover:underline ">
               Selengkapnya
             </Link>
           </div>

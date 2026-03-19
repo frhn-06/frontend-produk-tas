@@ -84,29 +84,29 @@ const ProductInfo = (props: TypeProps) => {
             />
           
             <Card className="p-4">
-              <CardHeader className="text-2xl text-default-700 font-bold">
+              <CardHeader className="text-xl lg:text-2xl text-default-700 font-bold">
                 {data?.name}
               </CardHeader>
               <CardBody>
-                <p className="text-default-400">
+                <p className="text-sm lg:text-base text-default-400">
                   {`${data.quantity}`} in stock
                 </p>
 
-                <div className="my-4">
-                  <StarUi dataStar={data?.starsAgr as number} comment={data?.totalComment} />  
+                <div className="my-2 lg:my-4">
+                  <StarUi size="md" dataStar={data?.starsAgr as number} comment={data?.totalComment} />  
                 </div>
 
                 <div className="flex gap-2">
-                  <h3 className={cn("font-bold text-xl text-default-700", {"text-default-400 line-through": data?.discount && data?.discount as number > 0})}>
+                  <h3 className={cn("font-bold text-md lg:text-xl text-default-700", {"text-default-400 line-through": data?.discount && data?.discount as number > 0})}>
                     {convert.IDR(Number(data?.price))}
                   </h3>
                   <span className={cn("text-default-700 font-bold", {"hidden" : !data?.discount})}>
                     -
                   </span>
-                  <h3 className={cn("text-default-700 font-bold text-xl", {"hidden" : !data?.discount})}>
+                  <h3 className={cn("text-default-700 font-bold text-md lg:text-xl", {"hidden" : !data?.discount})}>
                     {convert.IDR(Number(Number(data?.price) - (Number(data?.price) * Number(data?.discount) / 100)))}
                   </h3>
-                  <span className={cn("text-default-400", {"hidden" : !data?.discount})}>
+                  <span className={cn("text-sm lg:text-base text-default-400", {"hidden" : !data?.discount})}>
                     sale {data?.discount}%
                   </span>
                 </div>
