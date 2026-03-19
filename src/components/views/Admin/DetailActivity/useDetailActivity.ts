@@ -40,8 +40,8 @@ const useDetailActivity = () => {
         onSuccess() {
             setToaster({
                 type: "success",
-                message: "success to create activity"
-        });
+                message: "success to update activity"
+            });
         }
     })
     

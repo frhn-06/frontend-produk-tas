@@ -80,7 +80,7 @@ const TabPria = (props: TypeProps) => {
         <CardBody className='items-center'>
           <Skeleton className='rounded-2xl' isLoaded={router.isReady && !isLoadingProductsByPriaByCategory}>
             {dataProductsByPriaByCategory && dataProductsByPriaByCategory?.data?.length > 0 && (
-              <Pagination showControls initialPage={Number(currentPage)} total={dataProductsByPriaByCategory?.data?.length} onChange={handlePage} />
+              <Pagination showControls initialPage={Number(currentPage)} total={dataProductsByPriaByCategory?.data?.pagination?.totalPage} onChange={handlePage} />
             )}
           </Skeleton>
         </CardBody>

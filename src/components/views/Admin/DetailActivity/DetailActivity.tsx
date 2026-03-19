@@ -4,6 +4,7 @@ import useDetailActivity from "./useDetailActivity";
 import useUpdateActivity from "./useUpdateActivity";
 import { Controller } from "react-hook-form";
 import InputFile from "@/components/ui/InputFile";
+import useMediaHandler from "@/hooks/mediaHandler";
 
 const DetailActivity = () => {
     const {
@@ -33,6 +34,9 @@ const DetailActivity = () => {
         inputImage,
     } = useUpdateActivity()
 
+    const {mutateDeleteImage} = useMediaHandler();
+
+
     useEffect(() => {
       if(dataActivity) {
         setValueUpdateActivity("name", `${dataActivity?.data?.name}`);
@@ -41,6 +45,14 @@ const DetailActivity = () => {
 
     useEffect(() => {
       if(isSuccessUpdateActivity) {
+          mutateDeleteImage({
+            fileUrl: {
+              fileUrl: dataActivity?.data?.image
+            },
+            callback: () => {
+              true
+            }
+          })
         refetchActivity();
         reset();
       }

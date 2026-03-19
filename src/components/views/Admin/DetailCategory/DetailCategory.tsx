@@ -16,6 +16,7 @@ const DetailCategory = () => {
         isSuccessUpdateCategory
     } = useDetailCategory();
 
+
     useEffect(() => {
       if(isSuccessUpdateCategory) {
         refetchCategory();

@@ -70,7 +70,7 @@ const TabWanita = () => {
         <CardBody className='items-center'>
           <Skeleton className='rounded-2xl' isLoaded={router.isReady && !isLoadingProductsByWanita}>
             {dataProductsByWanita && dataProductsByWanita?.data?.length > 0 && (
-              <Pagination showControls initialPage={Number(currentPage)} total={dataProductsByWanita?.data?.length} onChange={handlePage} />
+              <Pagination showControls initialPage={Number(currentPage)} total={dataProductsByWanita?.data?.pagination?.totalPage} onChange={handlePage} />
             )}
           </Skeleton>
         </CardBody>

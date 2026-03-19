@@ -41,7 +41,7 @@ const useDetailCategory = () => {
             setToaster({
                 type: "success",
                 message: "success to create category"
-        });
+            });
         }
     })
     

@@ -41,7 +41,7 @@ const useDetailProduct = () => {
             setToaster({
                 type: "success",
                 message: "success to update product"
-        });
+            });
         }
     })
     

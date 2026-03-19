@@ -80,7 +80,7 @@ const TabUnisex = (props: TypeProps) => {
         <CardBody className='items-center'>
           <Skeleton className='rounded-2xl' isLoaded={router.isReady && !isLoadingProductsByUnisexByActivity}>
             {dataProductsByUnisexByActivity && dataProductsByUnisexByActivity?.data?.length > 0 && (
-              <Pagination showControls initialPage={Number(currentPage)} total={dataProductsByUnisexByActivity?.data?.length} onChange={handlePage} />
+              <Pagination showControls initialPage={Number(currentPage)} total={dataProductsByUnisexByActivity?.data?.pagination?.totalPage} onChange={handlePage} />
             )}
           </Skeleton>
         </CardBody>

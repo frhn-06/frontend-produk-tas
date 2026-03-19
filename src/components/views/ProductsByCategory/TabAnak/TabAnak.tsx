@@ -79,7 +79,7 @@ const TabAnak = (props: TypeProps) => {
         <CardBody className='items-center'>
           <Skeleton className='rounded-2xl' isLoaded={router.isReady && !isLoadingProductsByAnakByCategory}>
             {dataProductsByAnakByCategory && dataProductsByAnakByCategory?.data?.length > 0 && (
-              <Pagination showControls initialPage={Number(currentPage)} total={dataProductsByAnakByCategory?.data?.length} onChange={handlePage} />
+              <Pagination showControls initialPage={Number(currentPage)} total={dataProductsByAnakByCategory?.data?.pagination?.totalPage} onChange={handlePage} />
             )}
           </Skeleton>
         </CardBody>

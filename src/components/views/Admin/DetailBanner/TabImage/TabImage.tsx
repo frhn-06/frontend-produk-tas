@@ -5,6 +5,7 @@ import { Button, Card, CardBody, CardFooter, CardHeader, Skeleton, Spinner, Imag
 import InputFile from "@/components/ui/InputFile";
 import { Controller } from "react-hook-form";
 import { IBanner } from "@/types/banner";
+import useMediaHandler from "@/hooks/mediaHandler";
 
 interface TypeProps {
   data: string,
@@ -40,9 +41,20 @@ const TabImage = (props: TypeProps) => {
 
         inputImage,
     } = useTabImage();
+
+    const {mutateDeleteImage} = useMediaHandler();
+
   
     useEffect(() => {
       if(isSuccessUpdate) {
+        mutateDeleteImage({
+            fileUrl: {
+                fileUrl: data
+            },
+            callback: () => {
+              true
+            }
+        })
         reset();
       }
     }, [isSuccessUpdate])

@@ -97,7 +97,7 @@ const AddProduct = (props: TypeProps) => {
               </Skeleton>
 
               <Controller control={controlAddProduct} name="target" render={({field}) => (
-                <Select {...field} label={(<span className="text-default-500">Target</span>)} labelPlacement="outside"  isInvalid={!!errorsAddProduct?.target} errorMessage={errorsAddProduct?.target?.message}>
+                <Select {...field} label={(<span className="text-default-500">Target</span>)} labelPlacement="outside" variant="bordered" isInvalid={!!errorsAddProduct?.target} errorMessage={errorsAddProduct?.target?.message}>
                   <SelectItem key="unisex">
                     Unisex
                   </SelectItem>

@@ -41,7 +41,7 @@ const useDetailBanner = () => {
             setToaster({
                 type: "success",
                 message: "success to update banner"
-        });
+            });
         }
     })
     

@@ -1,4 +1,5 @@
 import { toasterContext } from "@/context/toasterContext";
+import useMediaHandler from "@/hooks/mediaHandler";
 import CategoryService from "@/services/category.service";
 import { useMutation } from "@tanstack/react-query";
 import { useContext } from "react";
@@ -6,6 +7,7 @@ import { useContext } from "react";
 const useDeleteCategory = (categoryId: string) => {
 
     const {setToaster} = useContext(toasterContext);
+    const {mutateDeleteImage} = useMediaHandler()
 
     const deleteCategory = async () => {
         const res = await CategoryService.delete(categoryId);
@@ -20,10 +22,18 @@ const useDeleteCategory = (categoryId: string) => {
                 message: error.message
             })
         },
-        onSuccess() {
-            setToaster({
-                type: "success",
-                message: "success to delete category"
+        onSuccess(data) {
+            const icon = data.data.icon;
+            mutateDeleteImage({
+                fileUrl: {
+                    fileUrl: `${icon}`
+                },
+                callback: () => {
+                    setToaster({
+                    type: "success",
+                    message: "success to delete category"
+                });
+                }
             })
         }
     })

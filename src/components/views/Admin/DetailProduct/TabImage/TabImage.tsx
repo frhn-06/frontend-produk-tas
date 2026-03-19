@@ -6,6 +6,7 @@ import InputFile from "@/components/ui/InputFile";
 import { Controller } from "react-hook-form";
 import { IProduct } from "@/types/product";
 import InputFiles from "@/components/ui/InputFiles/InputFiles";
+import useMediaHandler from "@/hooks/mediaHandler";
 
 interface TypeProps {
   dataImage: string,
@@ -34,6 +35,7 @@ const TabImage = (props: TypeProps) => {
         setValueImageProduct,
         handleSubmitImageProduct,
         reset,
+        watch,
 
         isPendingUploadImage,
         isPendingDeleteImage,
@@ -52,9 +54,21 @@ const TabImage = (props: TypeProps) => {
         urlImages,
         
     } = useTabImage();
+
+    const {mutateDeleteImage} = useMediaHandler();
+
   
     useEffect(() => {
       if(isSuccessUpdate) {
+        const oldImage = dataImage;
+        mutateDeleteImage({
+          fileUrl: {
+            fileUrl: oldImage
+          },
+          callback: () => {
+            true
+          }
+        });
         reset();
       }
     }, [isSuccessUpdate])

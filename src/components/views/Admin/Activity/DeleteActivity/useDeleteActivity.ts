@@ -1,4 +1,5 @@
 import { toasterContext } from "@/context/toasterContext";
+import useMediaHandler from "@/hooks/mediaHandler";
 import ActivityService from "@/services/activity.service";
 import { useMutation } from "@tanstack/react-query";
 import { useContext } from "react";
@@ -6,6 +7,7 @@ import { useContext } from "react";
 const useDeleteActivity = (ActivityId: string) => {
 
     const {setToaster} = useContext(toasterContext);
+    const {mutateDeleteImage} = useMediaHandler()
 
     const deleteActivity = async () => {
         const res = await ActivityService.delete(ActivityId);
@@ -20,10 +22,18 @@ const useDeleteActivity = (ActivityId: string) => {
                 message: error.message
             })
         },
-        onSuccess() {
-            setToaster({
-                type: "success",
-                message: "success to delete activity"
+        onSuccess(data) {
+            const image = data.data.image;
+            mutateDeleteImage({
+                fileUrl: {
+                    fileUrl: image
+                },
+                callback: () => {
+                    setToaster({
+                        type: "success",
+                        message: "success to delete activity"
+                    });
+                }
             })
         }
     })

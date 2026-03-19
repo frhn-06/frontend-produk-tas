@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Button, Card, CardBody, CardFooter, CardHeader, Skeleton, Spinner, Image } from "@heroui/react";
 import InputFile from "@/components/ui/InputFile";
 import { Controller } from "react-hook-form";
+import useMediaHandler from "@/hooks/mediaHandler";
 
 interface TypeProps {
   data: string,
@@ -39,9 +40,20 @@ const TabIcon = (props: TypeProps) => {
 
         inputIcon,
     } = useTabIcon();
+
+    const {mutateDeleteImage} = useMediaHandler();
   
     useEffect(() => {
       if(isSuccessUpdate) {
+        const icon = data;
+        mutateDeleteImage({
+          fileUrl: {
+            fileUrl: icon
+          },
+          callback: () => {
+            true
+          }
+        })
         reset();
       }
     }, [isSuccessUpdate])

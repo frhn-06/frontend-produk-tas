@@ -1,4 +1,5 @@
 import { toasterContext } from "@/context/toasterContext";
+import useMediaHandler from "@/hooks/mediaHandler";
 import BannerService from "@/services/banner.service";
 import { useMutation } from "@tanstack/react-query";
 import { useContext } from "react";
@@ -6,6 +7,7 @@ import { useContext } from "react";
 const useDeleteBanner = (BannerId: string) => {
 
     const {setToaster} = useContext(toasterContext);
+    const {mutateDeleteImage} = useMediaHandler();
 
     const deleteBanner = async () => {
         const res = await BannerService.delete(BannerId);
@@ -20,10 +22,18 @@ const useDeleteBanner = (BannerId: string) => {
                 message: error.message
             })
         },
-        onSuccess() {
-            setToaster({
-                type: "success",
-                message: "success to delete banner"
+        onSuccess(data) {
+            const banner = data.data.image;
+            mutateDeleteImage({
+                fileUrl: {
+                    fileUrl: banner
+                },
+                callback: () => {
+                    setToaster({
+                        type: "success",
+                        message: "success to delete banner"
+                    })
+                }
             })
         }
     })

@@ -3,13 +3,13 @@ import useSaleProduct from "./useSaleProduct";
 import { useRouter } from "next/router";
 import { IProduct } from "@/types/product";
 import CardProduct from "@/components/ui/CardProduct";
-import { Skeleton } from "@heroui/react";
+import { Pagination, Skeleton } from "@heroui/react";
 
 const SaleProduct = () => {
     const {
       url,
-      currentLimit,
       currentPage,
+      handlePage,
 
       dataSaleProducts,
       isLoadingSaleProducts
@@ -30,12 +30,12 @@ const SaleProduct = () => {
           </div>
 
           <div>
-            <p className='text-default-400 text-sm mb-6'>
+            <p className='text-default-400 text-sm'>
               Show 1 - 20 from {dataSaleProducts?.data?.length} sale products
             </p>
-              
           </div>
-          <div className='min-h-fit h-24 grid grid-cols-2 lg:grid-cols-3 gap-4'>
+
+          <div className='min-h-fit h-24 grid grid-cols-2 lg:grid-cols-3 gap-4 my-6'>
             {router.isReady && !isLoadingSaleProducts ? 
               dataSaleProducts?.data?.length < 1 ? (
                 <div>
@@ -61,6 +61,14 @@ const SaleProduct = () => {
                 </div>
               ))
             )}
+          </div>
+
+          <div className="flex justify-center items-center">
+            <Skeleton className='rounded-2xl' isLoaded={router.isReady && !isLoadingSaleProducts}>
+              {dataSaleProducts && dataSaleProducts?.data?.length > 0 && (
+                <Pagination showControls initialPage={Number(currentPage)} total={dataSaleProducts?.data?.pagination?.totalPage} onChange={handlePage} />
+              )}
+            </Skeleton>
           </div>
         </>
     )
