@@ -10,6 +10,7 @@ import Script from "next/script";
 import { environment } from "@/utils/environment";
 import { CiMenuKebab } from "react-icons/ci";
 import useCart from "@/hooks/cart";
+import Link from "next/link";
 
 const Cart = () => {
 
@@ -184,9 +185,9 @@ const Cart = () => {
               </Skeleton>
             ) : (
               <div className="flex-2 flex justify-center items-center">
-                <h2 className="text-primary underline">
-                  please sign in first for add your cart
-                </h2>
+                <Link href="/auth/login" className="text-primary underline">
+                  please login first for add to cart
+                </Link>
               </div>
             )}
             
