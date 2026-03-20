@@ -24,7 +24,7 @@ const FooterLayout = () => {
                   Office
                 </h1>
                 <p className="text-default-400 text-sm lg:text-base">
-                  Jl. Jendral Sudirman Pemalang 52353 <Link href="" className="font-semibold hover:underline cursor-pointer">Lihat map</Link>
+                  Jl. Jendral Sudirman Randudongkal Kab Pemalang <Link href="https://maps.app.goo.gl/DBTdN2nbTyc67GJv5" className="font-semibold hover:underline cursor-pointer">Lihat map</Link>
                 </p>
               </div>
             </div>
@@ -34,17 +34,12 @@ const FooterLayout = () => {
                   Menu
                 </h1>
                 <p className="text-default-400 text-sm lg:text-base cursor-pointer">
-                  <Link>
+                  <Link href="/">
                     Home
                   </Link>
                 </p>
                 <p className="text-default-400 text-sm lg:text-base cursor-pointer">
-                  <Link>
-                    About
-                  </Link>
-                </p>
-                <p className="text-default-400 text-sm lg:text-base cursor-pointer">
-                  <Link>
+                  <Link href="/products">
                     Product
                   </Link>
                 </p>
@@ -56,10 +51,10 @@ const FooterLayout = () => {
 
             <div className="flex-1 flex flex-col gap-4 items-center lg:items-start text-center lg:text-start">
               <div className="flex gap-8 justify-center">
-                <Link>
+                <Link href="https://instagram.com/an_692y">
                   <FaInstagram className="text-default-400 text-sm lg:text-base w-8 h-8 cursor-pointer"/>
                 </Link>
-                <Link>
+                <Link href="https://tiktok.com/@ans72nf9slan7j2m">
                   <FaTiktok className="text-default-400 text-sm lg:text-base w-8 h-8 cursor-pointer"/>
                 </Link>
                 <Link>

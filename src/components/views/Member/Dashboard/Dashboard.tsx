@@ -12,7 +12,7 @@ const Dashboard = () => {
     return (
         <section>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-            <Skeleton isLoaded={!!dataDashboardMember?.data?.totalOrders && !isLoadingDashboardMember} className="rounded-2xl">
+            <Skeleton isLoaded={!!dataDashboardMember?.data?.totalOrders || !isLoadingDashboardMember} className="rounded-2xl">
               <Card className="p-2 min-h-36">
                 <CardBody className="gap-4 justify-between">
                   <h1 className="font-semibold text-default-700 text-xl">
@@ -24,14 +24,14 @@ const Dashboard = () => {
                 </CardBody>
               </Card>
             </Skeleton>
-            <Skeleton isLoaded={!!dataDashboardMember?.data?.recentSuccessOrder[0].total && !isLoadingDashboardMember} className="rounded-2xl">
+            <Skeleton isLoaded={!!dataDashboardMember?.data?.recentSuccessOrder[0]?.total || !isLoadingDashboardMember} className="rounded-2xl">
               <Card className="p-2 min-h-36">
                 <CardBody className="gap-4 justify-between">
                   <h1 className="font-semibold text-default-700 text-xl">
                     Total Spending
                   </h1>
                   <h1 className="font-bold text-default-700 text-3xl">
-                    {convert.IDR(dataDashboardMember?.data?.recentSuccessOrder[0].total)}
+                    {dataDashboardMember?.data?.recentSuccessOrder[0]?.total ? convert.IDR(dataDashboardMember?.data?.recentSuccessOrder[0]?.total) : "Rp. 0"}
                   </h1>
                 </CardBody>
               </Card>
@@ -59,7 +59,8 @@ const Dashboard = () => {
                 Array.from({length: 4}).map((_, i) => (
                   <Skeleton key={i} className="rounded-2xl"></Skeleton>
               ))}
-              {!isLoadingDashboardMember && dataDashboardMember?.data?.lastOrder?.products.map((p: IProductsInOrder) => (
+              {!isLoadingDashboardMember && dataDashboardMember?.data?.lastOrder?.products ? 
+              dataDashboardMember?.data?.lastOrder?.products.map((p: IProductsInOrder) => (
                 <Card key={p._id} className="p-2 min-h-36">
                   <CardBody className="gap-4 justify-between">
                     <h1 className="font-semibold text-default-700">
@@ -77,7 +78,11 @@ const Dashboard = () => {
                     </p>
                   </CardBody>
                 </Card>
-              ))}
+              )) : (
+                <h1 className="text-xl text-default-400">
+                  you have never ordered a product
+                </h1>
+              )}
             </div>
           </div>
         </section>
