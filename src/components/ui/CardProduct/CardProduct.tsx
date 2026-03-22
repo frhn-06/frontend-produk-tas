@@ -18,7 +18,10 @@ const CardProduct = (props: TypeProps) => {
     } = props;
 
     return (
-        <Link href={`/products/${data.slug}`} className="flex flex-col gap-4 group active:bg-default-200">
+        <Link href={`/products/${data.slug}`} className="relative flex flex-col gap-4 group">
+          <div className="absolute z-10 top-0 bottom-0 right-0 left-0 group-active:bg-default-700/20">
+
+          </div>
           <div className="aspect-square flex items-center overflow-hidden relative group-active:bg-default-200">
             <div>           
               <img src={`${data.image}`} alt="foto" className="w-full object-cover object-center" />

@@ -20,7 +20,10 @@ const HomeCategory = (props: TypeProps) => {
     return (
       <section className="mx-4 lg:mx-8 my-4 py-4">
         <Card className="py-4 px-4 shadow-none">
-          <CardHeader className="justify-end">
+          <CardHeader className="justify-between">
+            <h3 className="text-primary font-semibold">
+              Category
+            </h3>
             <Link href="" className="text-default-500 font-semibold hover:underline text-sm lg:text-base ">
               Selengkapnya
             </Link>
@@ -28,7 +31,7 @@ const HomeCategory = (props: TypeProps) => {
           <CardBody>
             <div className="grid auto-cols-[8rem] grid-flow-col gap-4 overflow-x-auto lg:grid-cols-8">
               {router.isReady && !isLoading && !!data && Array.isArray(data) ? data?.map((c: ICategory) => (
-                <Link key={`${c._id}`} href={`/products/category/${c._id}`} className="bg-gray-500 p-1 rounded-xl flex items-center justify-center">
+                <Link key={`${c._id}`} href={`/products/category/${c._id}`} className="bg-gray-500 p-1 rounded-xl flex items-center justify-center active:scale-70 transition duration-200">
                   <Image src={`${c.icon}`} className="aspect-square " />
                 </Link>                
               )) : (
