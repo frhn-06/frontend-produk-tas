@@ -172,7 +172,7 @@ const NavbarLayout = (props: TypeProps) => {
                 list.href ? (
                   <NavbarMenuItem key={`${list}-${index}`}>
                     <Link
-                      className={cn("w-full font-semibold text-default-700 text-md active:bg-default-400/30 p-2 rounded-xl", {"text-primary" : router.pathname.startsWith(list.href)})}
+                      className={cn("w-full font-semibold text-default-700 text-md active:bg-default-400/30 p-2 rounded-xl", {"text-primary" : router.pathname === list.href})}
                       href={`${list.href}`}
                     >
                       {list.label}

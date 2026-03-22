@@ -42,7 +42,14 @@ const NavFilterProducts = (props: TypeProps) => {
             <div className="flex justify-end items-center lg:hidden">
               <IoIosCloseCircleOutline className="text-default-700 h-8 w-8" onClick={() => setOpenNav(!openNav)} />
             </div>
-      
+
+            <div className="border-b-2 border-gray-400/30 px-4">
+              <div className="flex justify-between items-center py-1 px-2">
+                <Link href="/products" className={cn("font-bold text-default-600 text-xl", {"text-primary" : router.pathname === "/products"})}>
+                  All Products
+                </Link>
+              </div>
+            </div>
 
             <div className="border-b-2 border-gray-400/30 px-4">
               <div className="flex justify-between items-center py-1 px-2">
@@ -84,7 +91,7 @@ const NavFilterProducts = (props: TypeProps) => {
               <div className="flex justify-between items-center py-1 px-2">
                 <Link href="/sale-products">
                   <Button className="text-default-100" color="primary">
-                    Shale Products
+                    Sale Products
                   </Button>
                 </Link>
               </div>

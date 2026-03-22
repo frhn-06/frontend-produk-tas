@@ -54,7 +54,7 @@ const FooterLayout = () => {
                 <Link href="https://instagram.com/an_692y">
                   <FaInstagram className="text-default-400 text-sm lg:text-base w-8 h-8 cursor-pointer"/>
                 </Link>
-                <Link href="https://tiktok.com/@ans72nf9slan7j2m">
+                <Link href="https://www.tiktok.com/@ans72nf9slan1j2m">
                   <FaTiktok className="text-default-400 text-sm lg:text-base w-8 h-8 cursor-pointer"/>
                 </Link>
                 <Link>
