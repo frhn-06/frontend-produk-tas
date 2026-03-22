@@ -29,12 +29,12 @@ const ProductPageLayout = (props: TypeProps) => {
     return (
 
       <LandingPageLayout title={title}>
-        <section className="flex max-w-7xl mx-auto bg-white">
+        <section className=" relative flex max-w-7xl mx-auto bg-white h-full">
           <NavFilterProducts categories={dataCategories?.data || []} activities={dataActivities?.data || []} isLoadingCategories={isLoadingCategories} isLoadingActivities={isLoadingActivities} openNav={openNav} setOpenNav={setOpenNav} />
           
           
 
-          <div className="p-4 relative w-full min-h-screen">
+          <div className="p-4 relative w-full h-full">
             {/* <div className="lg:hidden border-2 border-default-500/30 p-1 absolute left-0 bg-white" onClick={() => setOpenNav(!openNav)}>
               <FaChevronRight className={cn("transition duration-200", {"rotate-180": openNav})} />
             </div> */}

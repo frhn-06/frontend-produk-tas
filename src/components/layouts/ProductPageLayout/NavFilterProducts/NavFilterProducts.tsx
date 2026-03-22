@@ -37,7 +37,7 @@ const NavFilterProducts = (props: TypeProps) => {
     const [chevron, setChevron] = useState(objChevron);
 
     return (
-        <div className={cn("bg-white min-h-screen z-10 absolute -translate-x-full min-w-72 p-4 border-r-1 lg:relative lg:translate-x-0 transition duration-200", {"translate-x-0": openNav})}>
+        <div className={cn("bg-white min-h-full z-20 absolute -translate-x-full min-w-72 p-4 border-r-1 lg:relative lg:translate-x-0 transition duration-200", {"translate-x-0": openNav})}>
           <div className=" flex flex-col gap-8 ">
             <div className="flex justify-end items-center lg:hidden">
               <IoIosCloseCircleOutline className="text-default-700 h-8 w-8" onClick={() => setOpenNav(!openNav)} />
