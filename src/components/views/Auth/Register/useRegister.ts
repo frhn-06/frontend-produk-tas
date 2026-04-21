@@ -40,13 +40,17 @@ const useRegister = () => {
         return {data};
     }
 
-    const {handleSubmit: handleSubmitRegister, control, formState: {errors: errorsRegister}, reset: resetRegister} = useForm({
+    const {handleSubmit: handleSubmitRegister, control, formState: {errors: errorsRegister}, reset: resetRegister, setError} = useForm({
         resolver: yupResolver(schemaRegister)
     })
 
     const {mutate: mutateCreateUser, isPending: isPendingCreateUser, isSuccess: isSuccessCreateUser} = useMutation({
         mutationFn: (payload: IRegister) => createUser(payload),
         onError(error) {
+            setError("root", {
+                type: "server",
+                message: error.message
+            })
             setToaster({
                 type: "error",
                 message: error.message

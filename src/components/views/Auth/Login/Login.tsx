@@ -23,6 +23,11 @@ const Login = () => {
             Login
           </h1>
           <form className="flex flex-col gap-4" onSubmit={handleSubmitLogin(onLogin)}>
+            {errorsLogin.root && (
+              <p className="text-red-500">
+                {errorsLogin.root.message}
+              </p>
+            )}
             <Controller name="identifier" control={control} render={({field}) => (
               <Input {...field} id="identifier" variant="bordered" label="Email" size="sm" isInvalid={!!errorsLogin?.identifier} errorMessage={errorsLogin?.identifier?.message} />
             )} />

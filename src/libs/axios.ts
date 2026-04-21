@@ -33,7 +33,20 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
     (response) => response,
-    (error) => Promise.reject(error)
+    (error) => {
+        const errorResponse = error?.response;
+        if(errorResponse?.data) {
+            const customError = {
+                message: errorResponse?.data?.meta?.message || "terjadi kesalahan di server",
+                data: errorResponse?.data?.data || null,
+                status: errorResponse?.status
+            }
+            
+            return Promise.reject(customError);
+        }
+
+        return Promise.reject(error);
+    }
 );
 
 export default instance;

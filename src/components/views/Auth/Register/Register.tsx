@@ -33,6 +33,11 @@ const Register = () => {
             Register
           </h1>
           <form className="flex flex-col gap-4" onSubmit={handleSubmitRegister(onCreateUser)}>
+            {errorsRegister.root && (
+              <p className="text-red-500">
+                {errorsRegister.root.message}
+              </p>
+            )}
             <Controller name="email" control={control} render={({field}) => (
               <Input {...field} type="email" id="fullname" variant="bordered" label="Email" size="sm" isInvalid={!!errorsRegister?.email} errorMessage={errorsRegister?.email?.message} />
             )} />

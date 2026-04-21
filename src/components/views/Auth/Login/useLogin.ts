@@ -39,13 +39,17 @@ const useLogin = () => {
         }
     }
 
-    const {handleSubmit: handleSubmitLogin, control, formState: {errors: errorsLogin}, reset: resetLogin} = useForm({
+    const {handleSubmit: handleSubmitLogin, control, formState: {errors: errorsLogin}, reset: resetLogin, setError} = useForm({
         resolver: yupResolver(schemaLogin)
     })
 
     const {mutate: mutateLogin, isPending: isPendingMutateLogin} = useMutation({
         mutationFn: (payload: ILogin) => Login(payload),
         onError(error) {
+            setError("root", {
+                type: "server",
+                message: error.message
+            })
             setToaster({
                 type: "error",
                 message: error.message
