@@ -1,5 +1,6 @@
 import AuthService from "@/services/auth.service";
 import { environment } from "@/utils/environment";
+import axios from "axios";
 import NextAuth, { Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from 'next-auth/providers/credentials'
@@ -35,19 +36,58 @@ export default NextAuth({
             async authorize(credentials: Record<"identifier" | "password", string> | undefined) : Promise<UserExtended | null> {
                 const {identifier, password} = credentials as {identifier: string; password: string;}
 
-                const result = await AuthService.login({
-                    identifier: identifier,
-                    password: password
-                });
+                // const result = await AuthService.login({
+                //     identifier: identifier,
+                //     password: password
+                // });
 
-                const accessToken = result.data.data;
+                const responseLogin = await fetch(
+                    `${environment.API_URL}/auth/login`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            identifier,
+                            password
+                        })
+                    }
+                )
+
+                const resultLogin = await responseLogin.json();
+
+                const accessToken = resultLogin.data;
                 
-                const me = await AuthService.getProfileWithToken(accessToken);
-                const user = me.data.data;
+                // const me = await AuthService.getProfileWithToken(accessToken);
+                const responseMe = await fetch(
+                    `${environment.API_URL}/me`,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            authorization: `Bearer ${accessToken}`
+                        }
+                    }
+                )
 
-                if(accessToken && result.status === 200 && user._id && me.status === 200) {
-                    user.accessToken = accessToken;
-                    return user;
+                const resultMe = await responseMe.json();
+                // const user = me.data.data;
+                if(!responseMe.ok) return null;
+
+                const user = resultMe.data;
+
+                // if(accessToken && result.status === 200 && user._id && me.status === 200) {
+                //     user.accessToken = accessToken;
+                //     return user;
+                // } else {
+                //     return null;
+                // }
+                if(accessToken && user.id) {
+                    return {
+                        ...user,
+                        accessToken
+                    }
                 } else {
                     return null;
                 }
