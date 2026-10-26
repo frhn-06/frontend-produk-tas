@@ -34,6 +34,7 @@ export default NextAuth({
                 password: {label: "password", type: "password"}
             },
             async authorize(credentials: Record<"identifier" | "password", string> | undefined) : Promise<UserExtended | null> {
+                console.log("AUTHORIZE DIPANGGIL");
                 const {identifier, password} = credentials as {identifier: string; password: string;}
 
                 // const result = await AuthService.login({
