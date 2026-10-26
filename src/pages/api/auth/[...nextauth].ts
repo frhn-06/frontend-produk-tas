@@ -1,6 +1,4 @@
-import AuthService from "@/services/auth.service";
 import { environment } from "@/utils/environment";
-import axios from "axios";
 import NextAuth, { Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from 'next-auth/providers/credentials'
