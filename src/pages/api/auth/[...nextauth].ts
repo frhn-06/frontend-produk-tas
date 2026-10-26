@@ -72,7 +72,7 @@ export default NextAuth({
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
-                            authorization: `Bearer ${accessToken}`
+                            Authorization: `Bearer ${accessToken}`
                         }
                     }
                 )
