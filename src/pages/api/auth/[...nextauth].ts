@@ -54,8 +54,14 @@ export default NextAuth({
                         })
                     }
                 )
-
+                
                 const resultLogin = await responseLogin.json();
+                console.log("LOGIN STATUS:", responseLogin.status);
+                console.log("LOGIN RESPONSE:", {
+                ok: responseLogin.ok,
+                keys: Object.keys(resultLogin),
+                dataType: typeof resultLogin.data,
+                });
 
                 const accessToken = resultLogin.data;
                 
@@ -72,9 +78,16 @@ export default NextAuth({
                 )
 
                 const resultMe = await responseMe.json();
+                console.log("ME STATUS:", responseMe.status);
+                console.log("ME RESPONSE:", {
+                ok: responseMe.ok,
+                keys: Object.keys(resultLogin),
+                dataType: typeof resultMe.data,
+
+                });
                 // const user = me.data.data;
                 if(!responseMe.ok) return null;
-
+                
                 const user = resultMe.data;
 
                 // if(accessToken && result.status === 200 && user._id && me.status === 200) {
