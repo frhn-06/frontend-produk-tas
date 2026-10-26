@@ -61,7 +61,7 @@ export default NextAuth({
                 
                 // const me = await AuthService.getProfileWithToken(accessToken);
                 const responseMe = await fetch(
-                    `${environment.API_URL}/me`,
+                    `${environment.API_URL}/auth/me`,
                     {
                         method: "GET",
                         headers: {
