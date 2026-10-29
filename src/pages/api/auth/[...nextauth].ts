@@ -95,7 +95,7 @@ export default NextAuth({
                 // } else {
                 //     return null;
                 // }
-                if(accessToken && user.id) {
+                if(accessToken && user._id) {
                     return {
                         ...user,
                         accessToken
