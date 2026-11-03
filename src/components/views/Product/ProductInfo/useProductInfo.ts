@@ -22,7 +22,10 @@ const useProductInfo = () => {
             })
         },
         onSuccess(result) {
-            console.log("result", result);
+            console.log("result:", result);
+            console.log("payment:", result.payment);
+            console.log("token:", result.payment?.token);
+            console.log("snap:", window.snap);
             const transactionToken = result?.payment?.token;
             window.snap.pay(transactionToken);
         }
