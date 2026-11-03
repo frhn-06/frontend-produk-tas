@@ -22,7 +22,8 @@ const useProductInfo = () => {
             })
         },
         onSuccess(result) {
-            const transactionToken = result.payment.token;
+            console.log("result", result);
+            const transactionToken = result?.payment?.token;
             window.snap.pay(transactionToken);
         }
     })
