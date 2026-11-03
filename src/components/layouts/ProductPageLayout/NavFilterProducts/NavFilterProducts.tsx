@@ -1,7 +1,8 @@
 import { IActivity } from "@/types/activity";
 import { ICategory } from "@/types/category";
 import { cn } from "@/utils/cn";
-import {  BreadcrumbItem, Breadcrumbs, Button, Link } from "@heroui/react";
+import {  BreadcrumbItem, Breadcrumbs, Button } from "@heroui/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
 import { FaChevronUp } from "react-icons/fa";
