@@ -30,7 +30,14 @@ const ProductPageLayout = (props: TypeProps) => {
 
       <LandingPageLayout title={title}>
         <section className=" relative flex max-w-7xl mx-auto bg-white h-full">
-          <NavFilterProducts categories={dataCategories?.data || []} activities={dataActivities?.data || []} isLoadingCategories={isLoadingCategories} isLoadingActivities={isLoadingActivities} openNav={openNav} setOpenNav={setOpenNav} />
+          <NavFilterProducts 
+            categories={dataCategories?.data || []} 
+            activities={dataActivities?.data || []} 
+            isLoadingCategories={isLoadingCategories} 
+            isLoadingActivities={isLoadingActivities} 
+            openNav={openNav} 
+            setOpenNav={setOpenNav} 
+          />
           
           
 

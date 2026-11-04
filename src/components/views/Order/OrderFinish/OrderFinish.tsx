@@ -1,10 +1,19 @@
+import { ITransactionStatus } from "@/pages/order/finish";
 import Link from "next/link";
 
-const OrderFinish = () => {
+interface TypeProps {
+  status: ITransactionStatus["status"];
+}
+  
+const OrderFinish = (props: TypeProps) => {
+  const { 
+    status 
+  } = props;
+
   return (
     <div className="relative w-full h-full flex flex-col items-center justify-center gap-4">
       <h1 className="text-3xl font-bold">
-        Order Finish
+        Order {status}
       </h1>
       <p className="text-lg text-center">
         Thank you for your order!

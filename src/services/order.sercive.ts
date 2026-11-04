@@ -10,6 +10,8 @@ const OrderService = {
     findByUser: (params: string) => instance.get(`/my-orders?${params}`),
 
     findById: (id: string) => instance.get(`${endpoint.ORDERS}/${id}`),
+
+    finish: (id: string) => instance.post(`${endpoint.ORDERS}/${id}/finish`),
 }
 
 export default OrderService;
