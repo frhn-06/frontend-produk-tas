@@ -12,6 +12,7 @@ interface ITransactionStatus {
 export const getServerSideProps = async (context: {query: {order_id: string}}) => {
     try {
         const orderId = context.query.order_id;
+        console.log("orderId", orderId);
         if (typeof orderId !== "string") {
             return {
                 props: {
@@ -21,6 +22,7 @@ export const getServerSideProps = async (context: {query: {order_id: string}}) =
         }
 
         const result = await OrderService.finish(context.query.order_id);
+        console.log("result", result?.data?.data);
 
         const status : ITransactionStatus["status"] = result?.data?.data?.order?.status || null;
 
