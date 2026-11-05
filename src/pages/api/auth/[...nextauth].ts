@@ -1,5 +1,5 @@
 import { environment } from "@/utils/environment";
-import NextAuth, { Session, User } from "next-auth";
+import NextAuth, { NextAuthOptions, Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from 'next-auth/providers/credentials'
 
@@ -16,8 +16,7 @@ export interface sessionExtened extends Session {
     accessToken?: string;
 }
 
-
-export default NextAuth({
+export const authOptions : NextAuthOptions = {
     session: {
         strategy: 'jwt',
         maxAge: 60*60
@@ -121,4 +120,6 @@ export default NextAuth({
             return session;
         }
     }
-})
+}
+
+export default NextAuth(authOptions);

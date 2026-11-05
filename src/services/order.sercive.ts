@@ -11,7 +11,11 @@ const OrderService = {
 
     findById: (id: string) => instance.get(`${endpoint.ORDERS}/${id}`),
 
-    finish: (id: string) => instance.get(`${endpoint.ORDERS}/${id}/finish`),
+    finish: (id: string, token: string) => instance.get(`${endpoint.ORDERS}/${id}/finish`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
 }
 
 export default OrderService;

@@ -49,4 +49,6 @@ instance.interceptors.response.use(
     }
 );
 
+
+export type { CustomSession };
 export default instance;

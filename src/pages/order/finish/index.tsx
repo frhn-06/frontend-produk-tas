@@ -2,6 +2,9 @@ import OrderLayout from "@/components/layouts/OrderLayout";
 import OrderFinish from "@/components/views/Order/OrderFinish/OrderFinish";
 import OrderService from "@/services/order.sercive";
 import { GetServerSideProps } from "next";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../../api/auth/[...nextauth]";
+import { CustomSession } from "@/libs/axios";
 
 interface ITransactionStatus {
     status: "pending" | "paid" | "cancelled" | "expired" | "completed" | null;
@@ -10,6 +13,16 @@ interface ITransactionStatus {
 
 export const getServerSideProps : GetServerSideProps = async (context) => {
     try {
+        const session : CustomSession | null = await getServerSession(context.req, context.res, authOptions);
+        if(!session?.accessToken) {
+            return {
+                props: {
+                    status: null
+                }
+            }
+        }
+
+
         const orderId = context.query.order_id;
         console.log("orderId", orderId);
         if (typeof orderId !== "string") {
@@ -20,7 +33,8 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
             }
         }
 
-        const result = await OrderService.finish(`${orderId}`);
+
+        const result = await OrderService.finish(`${orderId}`, session.accessToken);
         console.log("result", result?.data?.data);
 
         const status : ITransactionStatus["status"] = result?.data?.data?.order?.status || null;
