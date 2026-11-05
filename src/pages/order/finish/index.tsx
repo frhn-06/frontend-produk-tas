@@ -1,15 +1,14 @@
-"use client"
-
 import OrderLayout from "@/components/layouts/OrderLayout";
 import OrderFinish from "@/components/views/Order/OrderFinish/OrderFinish";
 import OrderService from "@/services/order.sercive";
+import { GetServerSideProps } from "next";
 
 interface ITransactionStatus {
-    status: "PENDING" | "PAID" | "CANCELLED" | "FAILED" | "EXPIRED" | "COMPLETED" | null;
+    status: "pending" | "paid" | "cancelled" | "expired" | "completed" | null;
 }
 
 
-export const getServerSideProps = async (context: {query: {order_id: string}}) => {
+export const getServerSideProps : GetServerSideProps = async (context) => {
     try {
         const orderId = context.query.order_id;
         console.log("orderId", orderId);
@@ -21,7 +20,7 @@ export const getServerSideProps = async (context: {query: {order_id: string}}) =
             }
         }
 
-        const result = await OrderService.finish(context.query.order_id);
+        const result = await OrderService.finish(`${orderId}`);
         console.log("result", result?.data?.data);
 
         const status : ITransactionStatus["status"] = result?.data?.data?.order?.status || null;
