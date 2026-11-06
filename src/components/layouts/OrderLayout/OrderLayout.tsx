@@ -17,7 +17,7 @@ const OrderLayout = (props: TypeProps) => {
     return (
         <>
           <PageHead title={title} />
-          <section className="relative flex flex-col items-center justify-center min-h-svh w-full max-w-9xl">
+          <section className="relative flex flex-col items-center justify-center min-h-svh w-full max-w-9xl mx-auto p-4">
             {children}
           </section>
         </>

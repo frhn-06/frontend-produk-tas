@@ -21,4 +21,22 @@ interface IProductsInOrder {
     _id: string
 }
 
-export type {IOrder, IDataOrder, IProductsInOrder};
+
+interface IOrderResponse {
+    _id?: string;
+    products?: IProductsInOrder[];
+    orderId?: string;
+    userId?: string;
+    status?: string;
+    total?: number;
+    shippingAddress?: {
+        name?: string;
+        phone?: string;
+        address?: string;
+        coordinate?: string[]
+    };
+    updatedAt?: string;
+    createdAt?: string;
+}
+
+export type {IOrder, IDataOrder, IProductsInOrder, IOrderResponse};
