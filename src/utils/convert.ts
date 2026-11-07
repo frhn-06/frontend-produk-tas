@@ -15,6 +15,17 @@ const convert = {
         return date.toLocaleString("id-ID")
     },
 
+    longTime(waktuAwal: string) {
+        const date = new Date(waktuAwal);
+        return date.toLocaleString("id-ID", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+        })
+    },
+
     time(waktuAwal: string) {
         const now = new Date();
         const waktuUpload = new Date(waktuAwal);

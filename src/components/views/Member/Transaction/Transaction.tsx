@@ -48,13 +48,28 @@ const Transaction = () => {
         case "createdAt" :
           return (
             <p>
-              {convert.time1(`${data.createdAt}`)}
+              {convert.longTime(`${data.createdAt}`)} WIB
             </p>
           )
         case "status" :
           return (
-            <Chip color={data.status === "settlement" ? "success" : data.status === "expired" ? "danger" : "warning"} variant="flat">
-              {data.status === "settlement" ? "Completed" : data.status === "expired" ? "Expired" : "Pending"}
+            <Chip 
+              color={
+                data.status === "settlement" ? "primary" : 
+                data.status === "expired" ? "danger" : 
+                data.status === "pending" ? "warning" :
+                data.status === "paid" ? "success" :
+                "default"
+              } 
+              variant="flat"
+            >
+              {
+                data.status === "paid" ? "Paid" : 
+                data.status === "expired" ? "Expired" : 
+                data.status === "pending" ? "Pending" : 
+                data.status === "completed" ? "Completed" : 
+                "Unknown"
+              }
             </Chip>
           )
         case "actions" :
